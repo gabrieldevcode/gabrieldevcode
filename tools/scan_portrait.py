@@ -14,9 +14,9 @@ Funciona dentro de <img> no README do GitHub.
 import sys
 import math
 
-W_CELLS = 44          # colunas do mosaico
-H_CELLS = 52          # linhas do mosaico
-CELL = 7              # tamanho da célula em px
+W_CELLS = 40          # colunas do mosaico
+H_CELLS = 44          # linhas do mosaico
+CELL = 8              # tamanho da célula em px
 GAP = 1               # respiro entre células
 PAD = 22
 
@@ -75,7 +75,7 @@ def to_svg(m):
             off = (CELL - GAP - size) / 2
             px = PAD + x * CELL + off
             py = PAD + y * CELL + off
-            delay = round(y * 0.045 + x * 0.006, 3)
+            delay = round((y * 0.05 + x * 0.02) % 4.5, 3)
             cells.append(
                 f'<rect x="{px:.1f}" y="{py:.1f}" width="{size}" height="{size}" rx="1" '
                 f'fill="{RAMP[idx]}" class="c" style="animation-delay:{delay}s"/>'
@@ -86,24 +86,24 @@ def to_svg(m):
   <defs>
     <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#2DD4BF" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#2DD4BF" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#2DD4BF" stop-opacity="0.10"/>
       <stop offset="100%" stop-color="#2DD4BF" stop-opacity="0"/>
     </linearGradient>
     <clipPath id="clip"><rect x="0" y="0" width="{w}" height="{h}" rx="10"/></clipPath>
     <style>
-      .c {{ opacity:1; animation: reveal 6s ease-out infinite; }}
-      @keyframes reveal {{ 0%{{opacity:0; transform:translateY(-2px)}} 12%{{opacity:1; transform:translateY(0)}} 88%{{opacity:1}} 100%{{opacity:.15}} }}
-      .beam {{ animation: sweep 6s linear infinite; }}
-      @keyframes sweep {{ 0%{{transform:translateY(-40px)}} 100%{{transform:translateY({scan_h}px)}} }}
-      .blink {{ animation: bl 1.1s steps(1) infinite; }}
-      @keyframes bl {{ 0%,55%{{opacity:1}} 56%,100%{{opacity:.2}} }}
+      .c {{ opacity:1; animation: breathe 9s ease-in-out infinite; }}
+      @keyframes breathe {{ 0%,100%{{opacity:.82}} 50%{{opacity:1}} }}
+      .beam {{ animation: sweep 11s cubic-bezier(.45,0,.55,1) infinite; }}
+      @keyframes sweep {{ 0%{{transform:translateY(-60px)}} 100%{{transform:translateY({scan_h}px)}} }}
+      .blink {{ animation: bl 3.4s ease-in-out infinite; }}
+      @keyframes bl {{ 0%,100%{{opacity:.45}} 50%{{opacity:1}} }}
       .mono {{ font-family:"SFMono-Regular","JetBrains Mono","Consolas",monospace; }}
     </style>
   </defs>
   <g clip-path="url(#clip)">
     <rect width="{w}" height="{h}" fill="{BG}"/>
     {body}
-    <rect x="0" y="0" width="{w}" height="34" fill="url(#beam)" class="beam"/>
+    <rect x="0" y="0" width="{w}" height="52" fill="url(#beam)" class="beam"/>
     <g class="mono" font-size="9" letter-spacing="2">
       <text x="{PAD}" y="{h - 14}" fill="#4C5C6B">SUBJECT_ID // GABRIEL</text>
       <text x="{w - PAD}" y="{h - 14}" fill="{ACCENT}" text-anchor="end" class="blink">SCAN OK</text>
