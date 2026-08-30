@@ -1,173 +1,131 @@
 <div align="center">
 
-<img src="./assets/hero.svg" width="100%" alt="Gabriel"/>
+<!--
+  HERO
+  Você precisa criar/substituir:
+  ./assets/hero.svg
+
+  Recomendo um banner horizontal, minimalista e técnico.
+  Evite excesso de texto dentro do SVG.
+-->
+
+<img src="./assets/hero.svg" width="100%" alt="Gabriel Barreto"/>
+
+<br>
+
+# Gabriel Barreto
 
 ### Engenharia Eletrônica e de Computação · UFRJ
 
-**Embedded systems · Applied AI · Automation**
+**Embedded Systems · Applied AI · Automation**
 
-Construo sistemas que conectam **hardware, software e inteligência** — do circuito ao produto.
+Building systems where **electronics, software and intelligence** meet.
 
-<br/>
+<br>
+
+<!--
+  LINKS
+  TROQUE:
+  SEU-LINKEDIN → seu endereço real do LinkedIn
+-->
 
 <a href="https://www.linkedin.com/in/SEU-LINKEDIN">
-<img src="https://img.shields.io/badge/LINKEDIN-0B1119?style=flat-square&logo=linkedin&logoColor=2DD4BF&labelColor=070B10"/>
+<img src="https://img.shields.io/badge/LinkedIn-070B10?style=flat-square&logo=linkedin&logoColor=2DD4BF" />
 </a>
 &nbsp;
-<a href="mailto:gabriel.robalo@outlook.com.br">
-<img src="https://img.shields.io/badge/EMAIL-0B1119?style=flat-square&logo=maildotru&logoColor=F5A524&labelColor=070B10"/>
+<a href="mailto:SEU-EMAIL">
+<img src="https://img.shields.io/badge/Email-070B10?style=flat-square&logo=gmail&logoColor=F5A524" />
 </a>
 &nbsp;
-<a href="https://lattes.cnpq.br/6770070890433954">
-<img src="https://img.shields.io/badge/LATTES-0B1119?style=flat-square&logo=googlescholar&logoColor=38BDF8&labelColor=070B10"/>
+<a href="SEU-LATTES">
+<img src="https://img.shields.io/badge/Lattes-070B10?style=flat-square&logo=google-scholar&logoColor=38BDF8" />
 </a>
 
-<br/><br/>
+<br><br>
 
-<img src="https://komarev.com/ghpvc/?username=gabrieldevcode&style=flat-square&color=2DD4BF&label=PROFILE+VIEWS&labelColor=070B10"/>
+<img src="https://komarev.com/ghpvc/?username=gabrieldevcode&style=flat-square&color=2DD4BF&label=VISITORS" />
 
 </div>
-
-<br/>
 
 ---
 
-## `01` — NOW BUILDING
+## What I Build
+
+I work on projects that connect the **physical and digital worlds**.
+
+My main interests are:
+
+`Embedded Systems` · `Electronics` · `Applied AI` · `Automation` · `Instrumentation`
+
+I like building complete systems — from **sensors and microcontrollers to software, data and intelligent behavior**.
+
+---
+
+## Selected Projects
+
+> The projects below are the ones I want people to notice first when they visit my profile.
 
 <table>
 <tr>
-<td width="50%" valign="top">
-
-### ⚡ Embedded Systems
-
-Projetos envolvendo **ESP32, sensores, displays, motores e eletrônica digital**.
-
-Do bring-up de hardware e comunicação serial até firmware, aquisição de dados e interfaces físicas.
-
-</td>
 
 <td width="50%" valign="top">
 
-### ◉ Applied AI
+### 🦾 Sentinela Offshore
 
-**Agentes, MCP, automação e ferramentas que operam software real.**
+Wearable instrumentation concept for **occupational exposure traceability**.
 
-Uso IA quando ela resolve um problema de engenharia — não apenas para colocar "AI" no projeto.
+The system combines embedded sensing, secure data storage and cryptographic signatures to create **tamper-evident records**.
 
-</td>
-</tr>
+`Embedded` `Sensors` `Security`
 
-<tr>
-<td width="50%" valign="top">
+<br>
 
-### ⚙ Automation
+<!--
+  COLOQUE AQUI O LINK DO REPOSITÓRIO:
+  https://github.com/gabrieldevcode/SEU-REPO
+-->
 
-Automação de processos reais com **Python, APIs, visão computacional e controle de aplicações legadas**.
-
-Planilha → sistema → resultado.
-
-</td>
-
-<td width="50%" valign="top">
-
-### 🔬 Research
-
-Pesquisa aplicada em **Avaliação de Ciclo de Vida, medição experimental e automação científica**.
-
-UFRJ · openLCA · Python · ISO 14044
-
-</td>
-</tr>
-</table>
-
-<br/>
-
-## `02` — ENGINEERING
-
-```text
-HARDWARE
-ESP32 / ESP32-S3     RP2040     Raspberry Pi
-SPI / I²C / UART     NFC/RFID   Sensors
-Displays             Motors     Digital Logic
-
-SOFTWARE
-Python               C          TypeScript
-React Native         Expo       Firebase
-Make / BSDmake       Linux      FreeBSD
-
-AI & AUTOMATION
-MCP / FastMCP        Claude Code
-Multi-agent systems  APIs
-Computer automation  Computer vision
-
-METHOD
-Spec-driven development
-Experimental measurement
-Systematic literature review
-Life Cycle Assessment
-```
-
-<br/>
-
-## `03` — PROOF OF WORK
-
-<div align="center">
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=gabrieldevcode&bg_color=00000000&color=D6E2EC&line=2DD4BF&point=F5A524&area=true&area_color=2DD4BF&hide_border=true&custom_title=Contribution%20Activity" width="100%"/>
-
-</div>
-
-<br/>
-
-<div align="center">
-
-<img src="https://github-readme-stats.vercel.app/api?username=gabrieldevcode&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&hide_title=true&bg_color=00000000&text_color=D6E2EC&icon_color=2DD4BF&ring_color=2DD4BF" height="165"/>
-
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=gabrieldevcode&layout=compact&langs_count=8&hide_border=true&hide_title=true&bg_color=00000000&text_color=D6E2EC&icon_color=2DD4BF" height="165"/>
-
-</div>
-
-<br/>
-
-> **The graph above is the point.**
->
-> Code, commits and projects — not a game.
-
-<br/>
-
-## `04` — SELECTED WORK
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-### 🧠 Synapsis
-
-Sistema de estudos baseado em **spaced repetition**, inicialmente desenvolvido em Python.
-
-`Python` · `Algorithms` · `Learning Systems`
+[View project →](https://github.com/gabrieldevcode/SEU-REPO)
 
 </td>
 
-<td width="50%" valign="top">
-
-### 📡 Sentinela Offshore
-
-Conceito de instrumentação vestível para **rastreabilidade de exposição ocupacional**, combinando sensores, armazenamento seguro e assinatura criptográfica.
-
-`Embedded` · `Sensors` · `Security`
-
-</td>
-</tr>
-
-<tr>
 <td width="50%" valign="top">
 
 ### 🏗️ Structural Dynamics
 
-Sistema de aquisição e excitação para estudar **ressonância, frequência natural e amortecimento** em estruturas.
+Experimental platform for studying the dynamic behavior of structures.
 
-`ESP32` · `MPU-6050` · `Instrumentation`
+Uses controlled excitation and inertial sensing to investigate **natural frequency, resonance and damping**.
+
+`ESP32` `MPU-6050` `Instrumentation`
+
+<br>
+
+<!-- COLOQUE AQUI O LINK DO REPOSITÓRIO -->
+
+[View project →](https://github.com/gabrieldevcode/SEU-REPO)
+
+</td>
+
+</tr>
+
+<tr>
+
+<td width="50%" valign="top">
+
+### 🧠 Synapsis
+
+A study system based on **spaced repetition** and adaptive review.
+
+Started as a Python project exploring algorithms and software designed around learning and memory.
+
+`Python` `Algorithms` `Learning Systems`
+
+<br>
+
+<!-- COLOQUE AQUI O LINK DO REPOSITÓRIO -->
+
+[View project →](https://github.com/gabrieldevcode/SEU-REPO)
 
 </td>
 
@@ -175,52 +133,176 @@ Sistema de aquisição e excitação para estudar **ressonância, frequência na
 
 ### 🤖 AI Infrastructure
 
-Ferramentas e infraestrutura para **agentes de IA, MCP servers e automação de software**.
+Experiments with **AI agents, MCP and software automation**.
 
-`Python` · `MCP` · `Agents`
+The goal is to connect models to real tools, applications and workflows instead of building isolated chat interfaces.
+
+`Python` `MCP` `Agents` `Automation`
+
+<br>
+
+<!-- COLOQUE AQUI O LINK DO REPOSITÓRIO -->
+
+[View project →](https://github.com/gabrieldevcode/SEU-REPO)
 
 </td>
+
 </tr>
 </table>
 
-<br/>
+---
 
-## `05` — BACKGROUND
-
-**UFRJ** · Engenharia Eletrônica e de Computação
-Pesquisa em automação de **Avaliação de Ciclo de Vida** com openLCA + Python.
-
-Antes da universidade: **robótica competitiva**, FLL e F1 in Schools.
-
-Hoje, concentro meus projetos em uma interseção:
-
-```text
-             HARDWARE
-                 │
-                 ▼
-        ┌─────────────────┐
-        │     SOFTWARE    │
-        └─────────────────┘
-                 │
-                 ▼
-               AI
-                 │
-                 ▼
-          REAL-WORLD USE
-```
-
-<br/>
+## Tech Stack
 
 <div align="center">
 
-### Let's build something.
+### Embedded
 
-<a href="mailto:gabriel.robalo@outlook.com.br">
+<img src="https://skillicons.dev/icons?i=arduino,raspberrypi" />
+
+`ESP32` · `ESP32-S3` · `RP2040` · `I²C` · `SPI` · `UART` · `NFC/RFID` · `Sensors` · `Digital Logic`
+
+<br><br>
+
+### Software
+
+<img src="https://skillicons.dev/icons?i=python,c,typescript,react,nextjs,linux,git,docker" />
+
+`Python` · `C` · `TypeScript` · `React` · `Next.js` · `Linux` · `Git` · `Docker`
+
+<br><br>
+
+### AI & Automation
+
+`MCP` · `FastMCP` · `Claude Code` · `Multi-Agent Systems` · `APIs` · `Computer Automation`
+
+</div>
+
+---
+
+## GitHub Activity
+
+<div align="center">
+
+<img
+src="https://github-readme-activity-graph.vercel.app/graph?username=gabrieldevcode&bg_color=00000000&color=D6E2EC&line=2DD4BF&point=F5A524&area=true&area_color=2DD4BF&hide_border=true"
+width="100%"
+/>
+
+<br>
+
+<img
+src="https://github-readme-stats.vercel.app/api?username=gabrieldevcode&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&hide_title=true&bg_color=00000000&text_color=D6E2EC&icon_color=2DD4BF&ring_color=2DD4BF"
+height="165"
+/>
+
+<img
+src="https://github-readme-stats.vercel.app/api/top-langs/?username=gabrieldevcode&layout=compact&langs_count=8&hide_border=true&hide_title=true&bg_color=00000000&text_color=D6E2EC"
+height="165"
+/>
+
+</div>
+
+---
+
+## About
+
+**Universidade Federal do Rio de Janeiro — UFRJ**
+Engenharia Eletrônica e de Computação · **2025–2030**
+
+<!--
+  PERSONALIZE ESTA PARTE.
+
+  Escreva aqui 2–4 linhas contando:
+  - o que você está estudando atualmente;
+  - quais áreas quer explorar;
+  - o tipo de problema que gosta de resolver.
+
+  Exemplo:
+  "Currently exploring embedded systems, intelligent automation
+  and experimental instrumentation, with a growing interest in
+  applied AI and hardware-software integration."
+-->
+
+Currently exploring **embedded systems, intelligent automation and experimental engineering**, with a growing interest in the intersection between hardware and AI.
+
+<!--
+  PESQUISA
+  Caso queira destacar sua pesquisa, substitua o texto abaixo
+  pelas informações corretas do seu projeto/laboratório.
+
+  Inclua:
+  - nome da pesquisa;
+  - laboratório/professor (se relevante);
+  - tecnologias;
+  - objetivo em 1 linha.
+-->
+
+I'm also involved in research related to **Life Cycle Assessment**, automation and open-source engineering tools.
+
+<!--
+  EXPERIÊNCIA ANTERIOR
+  Coloque aqui apenas coisas relevantes.
+
+  Exemplo:
+  Competitive robotics · FLL · F1 in Schools
+-->
+
+Before university, I was involved with **competitive robotics**, including FLL and F1 in Schools.
+
+---
+
+## Currently Exploring
+
+<div align="center">
+
+`Embedded AI`
+`Edge Computing`
+`AI Agents`
+`Instrumentation`
+`Electronics + Software`
+
+</div>
+
+<!--
+  OPCIONAL:
+  Se você estiver trabalhando em um projeto realmente forte no momento,
+  troque esta seção por:
+
+  ## Currently Building
+
+  ### Nome do projeto
+  Uma frase descrevendo o que está sendo construído.
+
+  `Tecnologia` `Tecnologia` `Tecnologia`
+
+  [Repository →](LINK)
+
+  Isso é especialmente bom porque mostra o que você está fazendo AGORA.
+-->
+
+---
+
+<div align="center">
+
+<br>
+
+### Electronics → Software → Intelligence
+
+Building things that **interact with the real world.**
+
+<br><br>
+
+<a href="mailto:SEU-EMAIL">
 <img src="https://img.shields.io/badge/GET_IN_TOUCH-2DD4BF?style=for-the-badge&labelColor=070B10&logoColor=070B10"/>
 </a>
 
-<br/><br/>
+<br><br>
 
-<sub>Open to internships, research and collaboration.</sub>
+<sub>
+Open to internships · research · engineering projects · collaboration
+</sub>
+
+<br><br>
 
 </div>
