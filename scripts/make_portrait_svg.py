@@ -1,10 +1,18 @@
-"""Gera o banner animado do perfil (assets/banner-dark.svg e banner-light.svg).
+"""Gera o banner animado (assets/banner-dark.svg e banner-light.svg).
 
-O retrato e um dithering Floyd-Steinberg 1-bit desenhado como <path> (nunca
-glifos de fonte - eles borram abaixo de 2px). A animacao de entrada revela ~64
-grupos de pontos espalhados por todo o retrato ao mesmo tempo, entao a foto
-"materializa" em vez de ser varrida de cima para baixo. Depois da entrada os
-grupos ficam oscilando de leve, o que mantem o retrato vivo sem duplicar dados.
+Duas camadas independentes, porque qualidade de retrato e movimento por ponto
+sao incompativeis numa camada so:
+
+  1. RETRATO - dithering Floyd-Steinberg 1-bit, milhares de sequencias de pontos
+     desenhadas como <path> (nunca glifos de fonte, que borram abaixo de 2px).
+     Denso demais para animar ponto a ponto, entao e agrupado em faixas que
+     derivam juntas.
+  2. ENXAME - ~700 pontos que se transformam entre chip, </> e rede neural.
+     Poucos o bastante para cada um ter a sua propria trajetoria.
+
+A entrada revela o retrato em grupos espalhados por todo o quadro ao mesmo
+tempo, nunca em varredura. Depois o loop dissolve o retrato, mostra as tres
+figuras e traz o retrato de volta.
 
 Uso:  python scripts/make_portrait_svg.py
 """
@@ -15,18 +23,28 @@ from pathlib import Path
 
 import numpy as np
 from PIL import Image
+from scipy.optimize import linear_sum_assignment
+
+import shapes
+from theme import MONO, THEMES, W
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / "build"
 ASSETS = ROOT / "assets"
 
-GRID_W, GRID_H = 258, 292      # resolucao do dithering
-DOT = 1.45                     # lado do ponto em unidades SVG
-GROUPS = 64                    # grupos da animacao de entrada
+GRID_W, GRID_H = 258, 292
+DOT = 1.36
+BANDS = 56           # faixas de deriva do retrato
+SUBS = 13            # sub-caminhos por faixa, cada um com o seu atraso de entrada
+CHUNK = 4            # quebra sequencias longas para a revelacao nao virar listra
 
-W, H = 1000, 492               # tamanho do banner
-BAR = 40                       # altura da barra de titulo
-PAD = 26
+TRAVELLERS = 700
+SHAPE_SPAN = 322     # lado que cada figura ocupa, em unidades SVG
+
+H = 500
+BAR = 40
+LOOP = 16.0          # duracao do ciclo
+LOOP_BEGIN = 2.7     # so comeca depois que a entrada terminou
 
 HANDLE = "gabrieldevcode"
 NAME = "GABRIEL BARRETO"
@@ -36,18 +54,12 @@ LINES = [
     "Rio de Janeiro, Brasil",
 ]
 
-THEMES = {
-    "dark": dict(
-        bg="#0A0E14", panel="#0D1117", stroke="#1C2430", chrome="#2DD4BF",
-        ink="#DCE7F2", text="#E6EDF3", muted="#7D8590", accent="#F5A524",
-        invert=False, floor=0.24,
-    ),
-    "light": dict(
-        bg="#FFFFFF", panel="#F6F8FA", stroke="#D8DEE6", chrome="#0D9488",
-        ink="#141A21", text="#101720", muted="#5B6672", accent="#B45309",
-        invert=True, floor=0.06,
-    ),
-}
+# Linha do tempo do ciclo, em fracao da duracao. Os intervalos sao propositalmente
+# desiguais: com quadros igualmente espacados toda fase dura o mesmo tempo e
+# nenhuma figura chega a assentar.
+KT = [0, 0.2125, 0.2875, 0.4125, 0.475, 0.6, 0.6625, 0.7875, 0.875, 0.90, 1]
+#     0s  3.4s    4.6s    6.6s    7.6s  9.6s 10.6s   12.6s   14.0s  14.4s 16s
+#     retrato --------|   chip -----|   </> ----|   rede ------|   volta -----
 
 
 def dither(ink: np.ndarray) -> np.ndarray:
@@ -75,7 +87,6 @@ def dither(ink: np.ndarray) -> np.ndarray:
 
 
 def runs(dots: np.ndarray) -> list:
-    """Sequencias horizontais de pontos ligados -> (x, y, comprimento)."""
     out = []
     h, w = dots.shape
     for y in range(h):
@@ -93,117 +104,171 @@ def runs(dots: np.ndarray) -> list:
 
 
 def path_for(rs: list) -> str:
-    parts = []
-    for x, y, n in rs:
-        px = round(x * DOT, 2)
-        py = round(y * DOT, 2)
-        wd = round(n * DOT, 2)
-        parts.append("M%s %sh%sv%sh-%sz" % (px, py, wd, DOT, wd))
-    return "".join(parts)
+    return "".join(
+        "M%s %sh%sv%sh-%sz" % (round(x * DOT, 2), round(y * DOT, 2),
+                               round(n * DOT, 2), DOT, round(n * DOT, 2))
+        for x, y, n in rs
+    )
 
 
-def build(theme: str) -> str:
-    t = THEMES[theme]
+def ink_map(theme: dict):
     gray = np.asarray(Image.open(BUILD / "prepped-gray.png").resize(
         (GRID_W, GRID_H), Image.LANCZOS), dtype=np.float64) / 255.0
     mask = np.asarray(Image.open(BUILD / "prepped-mask.png").resize(
         (GRID_W, GRID_H), Image.LANCZOS)) > 128
 
-    if t["invert"]:
-        # modo claro: tinta escura desenha as partes escuras da foto.
-        # o gamma < 1 puxa os meios-tons para cima, senao o rosto some no papel.
+    if theme["name"] == "light":
+        # tinta escura desenha as partes escuras; o gamma < 1 puxa os meios-tons
+        # para cima, senao o rosto some no papel
         ink = np.power(1.0 - gray, 0.82)
     else:
-        # modo escuro: pontos claros desenham a luz que bate no rosto.
-        # o piso mantem o polo preto visivel como silhueta em vez de sumir;
-        # o teto segura textura nas altas luzes em vez de virar bloco solido.
-        ink = t["floor"] + (0.93 - t["floor"]) * np.power(gray, 1.08)
+        # pontos claros desenham a luz do rosto. o piso mantem o polo preto como
+        # silhueta; o teto segura textura nas altas luzes
+        ink = 0.24 + (0.93 - 0.24) * np.power(gray, 1.08)
     ink = np.clip(ink, 0.0, 1.0)
     ink[~mask] = 0.0
 
-    # dissolve a base do busto para o corte reto nao terminar em aresta dura
-    fade = np.ones(GRID_H)
-    tail = 30
-    fade[-tail:] = np.linspace(1.0, 0.12, tail)
+    fade = np.ones(GRID_H)                  # dissolve o pe do busto
+    fade[-30:] = np.linspace(1.0, 0.12, 30)
     ink *= fade[:, None]
+    return ink, mask
 
-    dots = dither(ink)
-    dots[~mask] = False          # corta o sangramento do erro na borda da mascara
 
-    rs = runs(dots)
+def swarm_paths(cx: float, cy: float) -> list:
+    """Trajetorias do enxame: uma nuvem por figura, ja pareadas ponto a ponto."""
+    clouds = [
+        shapes.sample(fn(), TRAVELLERS, seed=11 + i, span=SHAPE_SPAN, cx=cx, cy=cy)
+        for i, fn in enumerate(shapes.SHAPES)
+    ]
+    # Cada ponto vai para a posicao mais barata na figura seguinte (transporte
+    # otimo). Sem isso as trajetorias se cruzam em massa e a transicao vira ruido.
+    ordered = [clouds[0]]
+    for nxt in clouds[1:]:
+        cost = ((ordered[-1][:, None, :] - nxt[None, :, :]) ** 2).sum(-1)
+        _, col = linear_sum_assignment(cost)
+        ordered.append(nxt[col])
+    return ordered
 
-    # Corta sequencias longas antes de sortear o grupo. Sem isso, uma area
-    # solida (o polo preto) entra inteira de uma vez e a revelacao vira listras
-    # horizontais em vez de uma nuvem de pontos.
-    CHUNK = 4
+
+def build(theme_name: str) -> str:
+    t = THEMES[theme_name]
+    ink, _ = ink_map(t)
+    rs = runs(dither(ink))
+
+    # sequencias longas viram pedacos de 4: uma area solida entrando inteira
+    # transforma a revelacao em listras horizontais
     pieces = []
     for x, y, n in rs:
         for off in range(0, n, CHUNK):
             pieces.append((x + off, y, min(CHUNK, n - off)))
 
-    rnd = random.Random(7)
-    buckets = [[] for _ in range(GROUPS)]
-    for r in pieces:
-        buckets[rnd.randrange(GROUPS)].append(r)
-
+    # --- geometria -----------------------------------------------------------
     pw, ph = GRID_W * DOT, GRID_H * DOT
-    px = PAD + 8
-    py = BAR + 10                  # o pe do busto dissolve, entao nao precisa centralizar
-    rx = px + pw + 46
-    cx = rx + (W - PAD - rx) / 2   # centro da coluna de texto
+    fw, fh = 372, 418
+    fx, fy = 26, BAR + 16
+    px = fx + (fw - pw) / 2
+    py = fy + (fh - ph) / 2
+    cx_frame, cy_frame = fx + fw / 2, fy + fh / 2
+    tx = fx + fw + 34
+    cx = tx + (W - 26 - tx) / 2
 
-    paths = []
-    for b in buckets:
-        if not b:
+    # --- faixas de deriva ----------------------------------------------------
+    # A deriva e funcao linear da posicao, entao quantizar direto recria uma
+    # grade quadrada e a dissolucao sai em blocos. O ruido por peca quebra isso.
+    rnd = random.Random(7)
+    npr = np.random.default_rng(7)
+    axis = np.array([p[0] * DOT + p[1] * DOT * 0.6 for p in pieces])
+    axis = axis + npr.normal(0, 5.5, len(axis))
+    order = np.argsort(axis)
+    band_of = np.empty(len(pieces), int)
+    band_of[order] = (np.arange(len(pieces)) * BANDS) // len(pieces)
+
+    groups = [[[] for _ in range(SUBS)] for _ in range(BANDS)]
+    for i, p in enumerate(pieces):
+        groups[band_of[i]][rnd.randrange(SUBS)].append(p)
+
+    kt = ";".join(str(k) for k in KT)
+    spl = ";".join([".4 0 .2 1"] * (len(KT) - 1))
+
+    layers = []
+    for b, subs in enumerate(groups):
+        # cada faixa desliza na direcao do centro da moldura, onde as figuras
+        # nascem, e depois volta
+        frac = (b + 0.5) / BANDS - 0.5
+        dx, dy = frac * 150, frac * 46
+        inner = [
+            '<path class="d" style="animation-delay:%.2fs" d="%s"/>'
+            % (rnd.uniform(0.0, 1.35), path_for(sub))
+            for sub in subs if sub
+        ]
+        if not inner:
             continue
-        d = rnd.uniform(0.0, 1.55)
-        s = 4.6 + rnd.uniform(0.0, 3.4)
-        paths.append(
-            '<path class="d" style="animation-delay:%.2fs,%.2fs" d="%s"/>'
-            % (d, s, path_for(b))
+        vals = ";".join(["0 0", "0 0"] + ["%.1f %.1f" % (dx, dy)] * 7 + ["0 0", "0 0"])
+        layers.append(
+            '<g><animateTransform attributeName="transform" type="translate" '
+            'dur="%ss" begin="%ss" repeatCount="indefinite" calcMode="spline" '
+            'keyTimes="%s" keySplines="%s" values="%s"/>%s</g>'
+            % (LOOP, LOOP_BEGIN, kt, spl, vals, "".join(inner))
         )
-    portrait = "\n".join(paths)
+
+    # --- enxame --------------------------------------------------------------
+    a, b_, c = swarm_paths(cx_frame, cy_frame)
+    spl2 = ";".join([".45 0 .2 1"] * (len(KT) - 1))
+    dots = []
+    for i in range(TRAVELLERS):
+        seq = [a[i], a[i], a[i], a[i], b_[i], b_[i], c[i], c[i], c[i], a[i], a[i]]
+        dots.append(
+            '<circle r="1.15"><animateTransform attributeName="transform" '
+            'type="translate" dur="%ss" begin="%ss" repeatCount="indefinite" '
+            'calcMode="spline" keyTimes="%s" keySplines="%s" values="%s"/></circle>'
+            % (LOOP, LOOP_BEGIN, kt, spl2,
+               ";".join("%.1f %.1f" % (p[0], p[1]) for p in seq))
+        )
 
     text_rows = "\n".join(
         '<text class="ln" x="%.0f" y="%d" style="animation-delay:%.2fs">%s</text>'
-        % (cx, 288 + i * 30, 1.5 + i * 0.22, v)
+        % (cx, 250 + i * 30, 1.45 + i * 0.22, v)
         for i, v in enumerate(LINES)
     )
 
     return TEMPLATE.format(
-        W=W, H=H, BAR=BAR, NAME=NAME, HANDLE=HANDLE,
-        ink=t["ink"], bg=t["bg"], panel=t["panel"], stroke=t["stroke"],
-        chrome=t["chrome"], text=t["text"], muted=t["muted"], accent=t["accent"],
+        W=W, H=H, BAR=BAR, NAME=NAME, HANDLE=HANDLE, MONO=MONO,
+        bg=t["bg"], panel=t["panel2"], stroke=t["stroke"], chrome=t["chrome"],
+        ink=t["ink"], text=t["text"], muted=t["muted"], accent=t["accent"],
         Wm1=W - 1, Hm1=H - 1, Wm24=W - 24, BARm12=BAR - 12,
         barmid=BAR / 2, bartext=BAR / 2 + 4.5, halfW=W / 2,
-        px=px, py=py, cx=round(cx), portrait=portrait, text_rows=text_rows,
-        rule_x1=round(cx - 60), rule_x2=round(cx + 60),
-        pill_y=288 + len(LINES) * 30 + 26,
+        fx=fx, fy=fy, brk=34, fx2=fx + fw, fy2=fy + fh,
+        px=px, py=py, cx=round(cx), layers="\n".join(layers), dots="\n".join(dots),
+        text_rows=text_rows, kt=kt, LOOP=LOOP, BEGIN=LOOP_BEGIN,
+        # opacidade e igual em todas as faixas, entao vai uma vez so no pai
+        portrait_op="1;1;0;0;0;0;0;0;0;1;1",
+        swarm_op="0;0;1;1;1;1;1;1;0;0;0",
+        rule_x1=round(cx - 62), rule_x2=round(cx + 62),
+        pill_y=250 + len(LINES) * 30 + 28,
     )
 
 
 TEMPLATE = '''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="{NAME}">
 <title>{NAME} - {HANDLE}</title>
 <style>
-  .d {{ fill:{ink}; opacity:0;
-        animation: reveal 1.5s ease-out both, breathe 7s ease-in-out infinite; }}
+  text {{ font-family: {MONO}; }}
+  .d {{ fill:{ink}; opacity:0; animation: reveal 1.2s ease-out both; }}
   @keyframes reveal {{ from {{ opacity:0 }} to {{ opacity:1 }} }}
-  @keyframes breathe {{ 0%,100% {{ opacity:1 }} 50% {{ opacity:.82 }} }}
 
-  text {{ font-family: ui-monospace,'SFMono-Regular','JetBrains Mono',Menlo,Consolas,monospace; }}
   .bar   {{ fill:{muted}; font-size:13px; letter-spacing:.6px; }}
+  .tag   {{ fill:{chrome}; font-size:9.5px; letter-spacing:2.6px; opacity:.75; }}
   .name  {{ fill:{text}; font-size:42px; font-weight:700; letter-spacing:3.5px;
-            text-anchor:middle; opacity:0; animation: rise .9s cubic-bezier(.2,.7,.3,1) .95s both; }}
-  .kicker{{ fill:{chrome}; font-size:13px; letter-spacing:5px; text-anchor:middle;
-            opacity:0; animation: rise .8s ease-out .75s both; }}
+            text-anchor:middle; opacity:0; animation: rise .9s cubic-bezier(.2,.7,.3,1) .9s both; }}
+  .kicker{{ fill:{chrome}; font-size:12.5px; letter-spacing:5px; text-anchor:middle;
+            opacity:0; animation: rise .8s ease-out .7s both; }}
   .ln    {{ fill:{muted}; font-size:14.5px; letter-spacing:.3px; text-anchor:middle;
             opacity:0; animation: rise .7s ease-out both; }}
   .pill  {{ fill:{accent}; font-size:13.5px; letter-spacing:1.2px; text-anchor:middle;
-            opacity:0; animation: rise .7s ease-out 2.3s both; }}
+            opacity:0; animation: rise .7s ease-out 2.25s both; }}
   .rule  {{ stroke:{chrome}; stroke-width:2; opacity:0;
-            animation: grow .8s cubic-bezier(.2,.7,.3,1) 1.25s both; }}
+            animation: grow .8s cubic-bezier(.2,.7,.3,1) 1.2s both; }}
   @keyframes rise {{ from {{ opacity:0; transform:translateY(9px) }} to {{ opacity:1; transform:none }} }}
-  @keyframes grow {{ from {{ opacity:0; stroke-dashoffset:120 }} to {{ opacity:1; stroke-dashoffset:0 }} }}
+  @keyframes grow {{ from {{ opacity:0; stroke-dashoffset:124 }} to {{ opacity:1; stroke-dashoffset:0 }} }}
 
   @media (prefers-reduced-motion: reduce) {{
     .d, .name, .kicker, .ln, .pill, .rule {{ opacity:1 !important; animation:none !important; }}
@@ -216,15 +281,30 @@ TEMPLATE = '''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" v
 <circle cx="24" cy="{barmid}" r="5.5" fill="#FF5F57"/>
 <circle cx="44" cy="{barmid}" r="5.5" fill="#FEBC2E"/>
 <circle cx="64" cy="{barmid}" r="5.5" fill="#28C840"/>
-<text class="bar" x="{halfW}" y="{bartext}" text-anchor="middle">{HANDLE}@github ~ $ ./profile.sh</text>
+<text class="bar" x="{halfW}" y="{bartext}" text-anchor="middle">{HANDLE}@github ~ $ ./profile.sh --live</text>
+
+<!-- moldura do retrato: so os cantos, para nao competir com os pontos -->
+<g stroke="{chrome}" stroke-width="1.2" fill="none" opacity=".45">
+  <path d="M{fx} {fy}h{brk}M{fx} {fy}v{brk}M{fx2} {fy}h-{brk}M{fx2} {fy}v{brk}"/>
+  <path d="M{fx} {fy2}h{brk}M{fx} {fy2}v-{brk}M{fx2} {fy2}h-{brk}M{fx2} {fy2}v-{brk}"/>
+</g>
+<text class="tag" x="{fx}" y="{fy}" transform="translate(2 -8)">VISUAL.MAP</text>
 
 <g transform="translate({px:.1f} {py:.1f})" shape-rendering="crispEdges">
-{portrait}
+  <animate attributeName="opacity" dur="{LOOP}s" begin="{BEGIN}s" repeatCount="indefinite"
+           keyTimes="{kt}" values="{portrait_op}"/>
+{layers}
 </g>
 
-<text class="kicker" x="{cx}" y="176">PROFILE</text>
-<text class="name" x="{cx}" y="230">{NAME}</text>
-<line class="rule" x1="{rule_x1}" y1="256" x2="{rule_x2}" y2="256" stroke-dasharray="120"/>
+<g fill="{ink}" opacity="0">
+  <animate attributeName="opacity" dur="{LOOP}s" begin="{BEGIN}s" repeatCount="indefinite"
+           keyTimes="{kt}" values="{swarm_op}"/>
+{dots}
+</g>
+
+<text class="kicker" x="{cx}" y="140">PROFILE</text>
+<text class="name" x="{cx}" y="196">{NAME}</text>
+<line class="rule" x1="{rule_x1}" y1="222" x2="{rule_x2}" y2="222" stroke-dasharray="124"/>
 {text_rows}
 <text class="pill" x="{cx}" y="{pill_y}">@{HANDLE}</text>
 
@@ -239,7 +319,7 @@ def main() -> None:
         svg = build(theme)
         out = ASSETS / ("banner-%s.svg" % theme)
         out.write_text(svg, encoding="utf-8")
-        print("ok: %s  (%.0f KB)" % (out.relative_to(ROOT), len(svg) / 1024))
+        print("ok: %s  (%.0f KB)" % (out.relative_to(ROOT), len(svg.encode()) / 1024))
 
 
 if __name__ == "__main__":
