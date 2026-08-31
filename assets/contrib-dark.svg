@@ -8,16 +8,28 @@
   .lg  { fill:#94A3B8; font-size:11px; }
   .ft  { fill:#94A3B8; font-size:12px; }
 
+  /* Um ciclo longo por celula, com o atraso da diagonal preservado: a grade
+     se desenha, fica parada quase o ciclo inteiro e se recolhe na mesma
+     diagonal, sem fim. O easing vai dentro dos keyframes porque o `linear` da
+     declaracao vale para o ciclo inteiro. */
   .c { opacity:0; transform-box:fill-box; transform-origin:center;
-        animation: pop 0.7s cubic-bezier(.2,.8,.3,1.2) both; }
-  .hi { animation: pop 0.7s cubic-bezier(.2,.8,.3,1.2) both,
-                    spark 1.4s ease-out both; }
+        animation: pop 15.0s linear infinite both; }
+  .hi { animation: pop 15.0s linear infinite both,
+                    spark 15.0s linear infinite both; }
   @keyframes pop {
-    0%   { opacity:0; transform:scale(.2) translateY(-7px) }
-    70%  { opacity:1; transform:scale(1.14) }
-    100% { opacity:1; transform:scale(1) }
+    0%       { opacity:0; transform:scale(.2) translateY(-7px);
+                animation-timing-function: cubic-bezier(.2,.8,.3,1.2) }
+    3.27%    { opacity:1; transform:scale(1.14) }
+    4.67%  { opacity:1; transform:scale(1) }
+    90.67%  { opacity:1; transform:scale(1);
+                animation-timing-function: cubic-bezier(.5,0,.75,0) }
+    96.67%  { opacity:0; transform:scale(.7) }
+    100%     { opacity:0; transform:scale(.2) }
   }
-  @keyframes spark { 0%,55% { filter:brightness(2.2) } 100% { filter:brightness(1) } }
+  @keyframes spark {
+    0%,3.00%   { filter:brightness(2.2) }
+    10.67%,100% { filter:brightness(1) }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .c, .hi { opacity:1 !important; animation:none !important; }

@@ -30,6 +30,26 @@ COL_DELAY = 0.045
 ROW_DELAY = 0.09
 POP = 0.7
 
+# A revelacao se repete a cada CYCLE segundos. Nao da para disparar no hover:
+# o GitHub renderiza o SVG do README dentro de um <img>, e <img> nao entrega
+# evento de ponteiro para dentro do documento SVG - nem :hover do CSS, nem
+# begin="mouseover" do SMIL chegam la. Repetir e a unica forma de quem esta
+# olhando ver a animacao de novo sem recarregar a pagina.
+CYCLE = 15.0
+
+
+def keyframes() -> dict:
+    """Converte os tempos do pop em porcentagens do ciclo inteiro."""
+    return {
+        "cycle": CYCLE,
+        "up": 100 * POP * 0.7 / CYCLE,      # fim do overshoot
+        "settle": 100 * POP / CYCLE,        # celula assentada
+        "hold": 100 * (CYCLE - 1.4) / CYCLE,  # comeca a sair
+        "gone": 100 * (CYCLE - 0.5) / CYCLE,
+        "spark_on": 100 * 0.45 / CYCLE,
+        "spark_off": 100 * 1.6 / CYCLE,
+    }
+
 MONTHS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
           "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
 WEEKDAYS = {1: "Seg", 3: "Qua", 5: "Sex"}
@@ -103,7 +123,7 @@ def build(data: dict, theme_name: str) -> str:
                  s["best_day"]["count"]))
 
     return TEMPLATE.format(
-        W=W, H=height, PAD=PAD, MONO=MONO, POP=POP,
+        W=W, H=height, PAD=PAD, MONO=MONO, POP=POP, **keyframes(),
         text=t["text"], muted=t["muted"], chrome=t["chrome"],
         rects="\n".join(rects), months="\n".join(labels), weekdays=wd,
         legend="\n".join(legend), footer=footer, footer_y=base_y,
@@ -122,16 +142,28 @@ TEMPLATE = '''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" v
   .lg  {{ fill:{muted}; font-size:11px; }}
   .ft  {{ fill:{muted}; font-size:12px; }}
 
+  /* Um ciclo longo por celula, com o atraso da diagonal preservado: a grade
+     se desenha, fica parada quase o ciclo inteiro e se recolhe na mesma
+     diagonal, sem fim. O easing vai dentro dos keyframes porque o `linear` da
+     declaracao vale para o ciclo inteiro. */
   .c {{ opacity:0; transform-box:fill-box; transform-origin:center;
-        animation: pop {POP}s cubic-bezier(.2,.8,.3,1.2) both; }}
-  .hi {{ animation: pop {POP}s cubic-bezier(.2,.8,.3,1.2) both,
-                    spark 1.4s ease-out both; }}
+        animation: pop {cycle}s linear infinite both; }}
+  .hi {{ animation: pop {cycle}s linear infinite both,
+                    spark {cycle}s linear infinite both; }}
   @keyframes pop {{
-    0%   {{ opacity:0; transform:scale(.2) translateY(-7px) }}
-    70%  {{ opacity:1; transform:scale(1.14) }}
-    100% {{ opacity:1; transform:scale(1) }}
+    0%       {{ opacity:0; transform:scale(.2) translateY(-7px);
+                animation-timing-function: cubic-bezier(.2,.8,.3,1.2) }}
+    {up:.2f}%    {{ opacity:1; transform:scale(1.14) }}
+    {settle:.2f}%  {{ opacity:1; transform:scale(1) }}
+    {hold:.2f}%  {{ opacity:1; transform:scale(1);
+                animation-timing-function: cubic-bezier(.5,0,.75,0) }}
+    {gone:.2f}%  {{ opacity:0; transform:scale(.7) }}
+    100%     {{ opacity:0; transform:scale(.2) }}
   }}
-  @keyframes spark {{ 0%,55% {{ filter:brightness(2.2) }} 100% {{ filter:brightness(1) }} }}
+  @keyframes spark {{
+    0%,{spark_on:.2f}%   {{ filter:brightness(2.2) }}
+    {spark_off:.2f}%,100% {{ filter:brightness(1) }}
+  }}
 
   @media (prefers-reduced-motion: reduce) {{
     .c, .hi {{ opacity:1 !important; animation:none !important; }}
