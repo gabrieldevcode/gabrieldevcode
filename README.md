@@ -92,7 +92,7 @@ Na prática isso vira **instrumentação embarcada**, **agentes de IA ligados a 
 
 **Embarcados e eletrônica**
 
-<img src="https://skillicons.dev/icons?i=arduino,raspberrypi,c,cpp,cmake,platformio&theme=dark" alt="Arduino, Raspberry Pi, C, C++, CMake, PlatformIO" />
+<img src="https://skillicons.dev/icons?i=arduino,raspberrypi,c,cpp,cmake&theme=dark" alt="Arduino, Raspberry Pi, C, C++, CMake" />
 
 `ESP32` · `ESP32-S3` · `RP2040` · `I²C` · `SPI` · `UART` · `LVGL` · `NFC/RFID` · `MPU-6050` · `ST7789`
 
