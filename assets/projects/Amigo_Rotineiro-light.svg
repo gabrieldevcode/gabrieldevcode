@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="490" height="178" viewBox="0 0 490 178" role="img" aria-label="Amigo Rotineiro">
+<title>gabrieldevcode/Amigo_Rotineiro</title>
+<defs>
+  <linearGradient id="g2light" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#0891B2"/>
+    <stop offset="1" stop-color="#7C3AED"/>
+  </linearGradient>
+</defs>
+<style>
+  text { font-family: ui-monospace,'SFMono-Regular','JetBrains Mono',Menlo,Consolas,'Liberation Mono',monospace; }
+  .rp { fill:#475569; font-size:11px; }
+  .ti { fill:#0F172A; font-size:17px; font-weight:700; letter-spacing:.2px; }
+  .ds { fill:#475569; font-size:11.5px; }
+  .bg { fill:#7C3AED; font-size:10px; text-anchor:middle; }
+  .lg { fill:#475569; font-size:10.5px; }
+  .mt { fill:#94A3B8; font-size:10.5px; }
+  .pc { fill:#0F172A; font-size:15px; font-weight:700; text-anchor:middle; }
+  .il { fill:#0F172A; font-size:19px; font-weight:700; text-anchor:middle; }
+
+  .in { opacity:0; animation: fade .6s ease-out both; }
+  .a1 { animation-delay:.15s } .a2 { animation-delay:.3s }
+  .a3 { animation-delay:.45s } .a4 { animation-delay:.6s }
+  @keyframes fade { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:none } }
+
+  .rg { animation: sweep 1.3s cubic-bezier(.2,.8,.25,1) .5s both; }
+  @keyframes sweep { from { stroke-dasharray:0 163.4 } to { stroke-dasharray:163.4 163.4 } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .in { opacity:1 !important; animation:none !important; }
+    .rg { animation:none !important; stroke-dasharray:163.4 163.4; }
+  }
+</style>
+
+<rect x=".5" y=".5" width="489" height="177" rx="12" fill="#F8FAFC" stroke="#CBD5E1">
+  <animate attributeName="stroke" values="#CBD5E1;#0891B2;#CBD5E1" dur="5s" repeatCount="indefinite"/>
+</rect>
+<path d="M12.5 .5h465a12 12 0 0 1 12 12V28H.5V12.5A12 12 0 0 1 12.5 .5z" fill="#F1F5F9" opacity=".85"/>
+<line x1="0" y1="28" x2="490" y2="28" stroke="#CBD5E1"/>
+<circle cx="18" cy="14.5" r="3.2" fill="#0891B2"/>
+<text class="rp" x="30" y="18">gabrieldevcode/Amigo_Rotineiro</text>
+<circle cx="472" cy="14.5" r="3.2" fill="#059669">
+  <animate attributeName="opacity" values="1;.25;1" dur="2.6s" repeatCount="indefinite"/>
+</circle>
+
+<g class="in a1">
+  <rect x="18" y="48" width="40" height="40" rx="11" fill="url(#g2light)" opacity=".18"/>
+  <rect x="18.5" y="48.5" width="39" height="39" rx="11" fill="none" stroke="url(#g2light)"/>
+  <text class="il" x="38" y="74">A</text>
+</g>
+
+<text class="ti in a1" x="70" y="64">Amigo Rotineiro</text>
+<g class="in a2"><text class="ds" x="70" y="84">Assistente com IA ligado ao Google</text>
+<text class="ds" x="70" y="101">Calendar, pelo terminal.</text></g>
+<g class="in a3"><g><rect x="70.0" y="118" width="48.6" height="19" rx="9.5" fill="none" stroke="#7C3AED" stroke-width="1" opacity=".55"/><text class="bg" x="94.3" y="131.5">Python</text></g>
+<g><rect x="125.6" y="118" width="48.6" height="19" rx="9.5" fill="none" stroke="#7C3AED" stroke-width="1" opacity=".55"/><text class="bg" x="149.9" y="131.5">Gemini</text></g>
+<g><rect x="181.2" y="118" width="61.8" height="19" rx="9.5" fill="none" stroke="#7C3AED" stroke-width="1" opacity=".55"/><text class="bg" x="212.1" y="131.5">Calendar</text></g></g>
+
+<g class="in a2">
+  <path d="M0 0 3.1 6.3 10 7.3 5 12.2l1.2 6.9L0 15.8l-6.2 3.3L-5 12.2-10 7.3l6.9-1L0 0z"
+        transform="translate(18.5 152) scale(.62)" fill="#7C3AED"/>
+  <text class="mt" x="32" y="157">1</text>
+  <text class="mt" x="52" y="157">atualizado há 1 ano</text>
+</g>
+
+<g class="in a2"><g><circle cx="308" cy="58.0" r="3.6" fill="#3572A5"/><text class="lg" x="319" y="62.0">Python 100.0%</text></g></g>
+
+<g class="in a3">
+  <circle cx="432" cy="96" r="26" fill="none" stroke="#EBEDF0" stroke-width="7"/>
+  <circle class="rg" cx="432" cy="96" r="26" fill="none"
+          stroke="url(#g2light)" stroke-width="7" stroke-linecap="round"
+          transform="rotate(-90 432 96)"/>
+  <text class="pc" x="432" y="96" dy="5">100%</text>
+</g>
+</svg>

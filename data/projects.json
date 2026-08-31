@@ -1,0 +1,134 @@
+{
+ "user": "gabrieldevcode",
+ "generated_at": "2026-08-30",
+ "projects": [
+  {
+   "repo": "synapsis",
+   "letter": "S",
+   "title": "Synapsis",
+   "blurb": "Estudos por repetição espaçada no terminal, sem dependências.",
+   "badges": [
+    "Python",
+    "CLI",
+    "Algoritmos"
+   ],
+   "url": "https://github.com/gabrieldevcode/synapsis",
+   "stars": 1,
+   "updated": "há 2 dias",
+   "languages": [
+    {
+     "name": "Python",
+     "share": 100.0
+    }
+   ]
+  },
+  {
+   "repo": "claude-usage",
+   "letter": "C",
+   "title": "Claude Usage Stick",
+   "blurb": "Medidor de uso da API portado para a CYD ESP32-2432S028.",
+   "badges": [
+    "C",
+    "ESP32",
+    "LVGL"
+   ],
+   "url": "https://github.com/gabrieldevcode/claude-usage",
+   "stars": 2,
+   "updated": "há 2 dias",
+   "languages": [
+    {
+     "name": "C",
+     "share": 72.2
+    },
+    {
+     "name": "C++",
+     "share": 25.1
+    },
+    {
+     "name": "Python",
+     "share": 1.3
+    }
+   ]
+  },
+  {
+   "repo": "Amigo_Rotineiro",
+   "letter": "A",
+   "title": "Amigo Rotineiro",
+   "blurb": "Assistente com IA ligado ao Google Calendar, pelo terminal.",
+   "badges": [
+    "Python",
+    "Gemini",
+    "Calendar"
+   ],
+   "url": "https://github.com/gabrieldevcode/Amigo_Rotineiro",
+   "stars": 1,
+   "updated": "há 1 ano",
+   "languages": [
+    {
+     "name": "Python",
+     "share": 100.0
+    }
+   ]
+  },
+  {
+   "repo": "Automacao_Dimob_2.0",
+   "letter": "D",
+   "title": "Automação DIMOB 2.0",
+   "blurb": "Robô que preenche a DIMOB na Receita Federal sozinho.",
+   "badges": [
+    "Python",
+    "RPA",
+    "Visão"
+   ],
+   "url": "https://github.com/gabrieldevcode/Automacao_Dimob_2.0",
+   "stars": 0,
+   "updated": "há 3 meses",
+   "languages": [
+    {
+     "name": "Python",
+     "share": 100.0
+    }
+   ]
+  },
+  {
+   "repo": "Automacao_Encaminhamento_Exame",
+   "letter": "E",
+   "title": "Encaminhamento ASO",
+   "blurb": "LLM lê a mensagem do cliente e gera a guia médica em Word.",
+   "badges": [
+    "Python",
+    "LLM",
+    "docx"
+   ],
+   "url": "https://github.com/gabrieldevcode/Automacao_Encaminhamento_Exame",
+   "stars": 0,
+   "updated": "há 3 meses",
+   "languages": [
+    {
+     "name": "Python",
+     "share": 100.0
+    }
+   ]
+  },
+  {
+   "repo": "Automacao-Imposto-de-Renda",
+   "letter": "I",
+   "title": "Automação do IR",
+   "blurb": "Preenche declarações de IR. Em produção num escritório.",
+   "badges": [
+    "Python",
+    "RPA",
+    "Produção"
+   ],
+   "url": "https://github.com/gabrieldevcode/Automacao-Imposto-de-Renda",
+   "stars": 1,
+   "updated": "há 1 ano",
+   "languages": [
+    {
+     "name": "Python",
+     "share": 100.0
+    }
+   ]
+  }
+ ]
+}

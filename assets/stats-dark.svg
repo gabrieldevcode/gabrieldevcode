@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="214" viewBox="0 0 1000 214" role="img" aria-label="Numeros e linguagens">
+<style>
+  text { font-family: ui-monospace,'SFMono-Regular','JetBrains Mono',Menlo,Consolas,'Liberation Mono',monospace; }
+  .hd { fill:#22D3EE; font-size:15px; font-weight:700; letter-spacing:.3px; }
+  .lb { fill:#94A3B8; font-size:13px; }
+  .vl { fill:#F8FAFC; font-size:13px; font-weight:700; text-anchor:end; }
+  .lg { fill:#F8FAFC; font-size:12.5px; }
+  .pc { fill:#94A3B8; font-size:12.5px; text-anchor:end; }
+  .nt { fill:#475569; font-size:10.5px; text-anchor:end; }
+
+  .rw { opacity:0; animation: fade .55s ease-out both; }
+  @keyframes fade { from { opacity:0; transform:translateY(7px) } to { opacity:1; transform:none } }
+  .sg { transform-box:fill-box; transform-origin:left center;
+         animation: grow .9s cubic-bezier(.2,.8,.25,1) both; }
+  @keyframes grow { from { transform:scaleX(0) } to { transform:scaleX(1) } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rw, .sg { opacity:1 !important; animation:none !important; transform:none !important; }
+  }
+</style>
+
+<rect x=".5" y=".5" width="489.0" height="213" rx="12" fill="#0C1426" stroke="#1B2942">
+  <animate attributeName="stroke" values="#1B2942;#22D3EE;#1B2942" dur="6s" begin="1s" repeatCount="indefinite"/>
+</rect>
+<rect x="510.5" y=".5" width="489.0" height="213" rx="12" fill="#0C1426" stroke="#1B2942">
+  <animate attributeName="stroke" values="#1B2942;#22D3EE;#1B2942" dur="6s" begin="3s" repeatCount="indefinite"/>
+</rect>
+
+<text class="hd" x="22" y="34">Números do GitHub</text>
+<line x1="22" y1="46" x2="468.0" y2="46" stroke="#22D3EE" stroke-width="1.5" opacity=".3"/>
+<g class="rw" style="animation-delay:0.25s"><polygon points="8,1.5 10,5.9 14.8,6.5 11.3,9.9 12.2,14.7 8,12.4 3.8,14.7 4.7,9.9 1.2,6.5 6,5.9" stroke="#A78BFA" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(22.0 50.0)"/><text class="lb" x="48" y="62">Estrelas recebidas</text><text class="vl" x="468" y="62">15</text></g>
+<g class="rw" style="animation-delay:0.36s"><g stroke="#A78BFA" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(22.0 76.0)"><circle cx="8" cy="8" r="6.6"/><path d="M8 4.2V8l2.6 1.8"/></g><text class="lb" x="48" y="88">Commits totais</text><text class="vl" x="468" y="88">359</text></g>
+<g class="rw" style="animation-delay:0.47s"><g stroke="#A78BFA" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(22.0 102.0)"><circle cx="4" cy="3.6" r="2.1"/><circle cx="4" cy="12.4" r="2.1"/><circle cx="12.4" cy="12.4" r="2.1"/><path d="M4 5.7v4.6M12.4 10.3V7.4a2.4 2.4 0 0 0-2.4-2.4H6.6"/><path d="M8.4 3.2 6.4 5l2 1.8"/></g><text class="lb" x="48" y="114">Pull requests</text><text class="vl" x="468" y="114">6</text></g>
+<g class="rw" style="animation-delay:0.58s"><g stroke="#A78BFA" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(22.0 128.0)"><circle cx="8" cy="8" r="6.6"/><path d="M8 4.6v4.2"/><circle cx="8" cy="11.5" r=".9" fill="#A78BFA" stroke="none"/></g><text class="lb" x="48" y="140">Issues abertas</text><text class="vl" x="468" y="140">1</text></g>
+<g class="rw" style="animation-delay:0.69s"><g stroke="#A78BFA" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(22.0 154.0)"><rect x="1.4" y="2" width="13.2" height="12" rx="2"/><path d="M4.4 2v12M1.4 6.6h3"/></g><text class="lb" x="48" y="166">Repositórios</text><text class="vl" x="468" y="166">24  (12 públicos)</text></g>
+
+<text class="hd" x="532.0" y="34">Linguagens mais usadas</text>
+<line x1="532.0" y1="46" x2="978" y2="46" stroke="#22D3EE" stroke-width="1.5" opacity=".3"/>
+<rect class="sg" x="532.00" y="48.0" width="237.50" height="13" fill="#3572A5" style="animation-delay:0.30s"><title>Python: 53.2% em 15 repos</title></rect>
+<rect class="sg" x="769.50" y="48.0" width="69.40" height="13" fill="#3178C6" style="animation-delay:0.39s"><title>TypeScript: 15.6% em 5 repos</title></rect>
+<rect class="sg" x="838.89" y="48.0" width="44.51" height="13" fill="#F34B7D" style="animation-delay:0.48s"><title>C++: 10.0% em 5 repos</title></rect>
+<rect class="sg" x="883.40" y="48.0" width="41.39" height="13" fill="#E34C26" style="animation-delay:0.57s"><title>HTML: 9.3% em 7 repos</title></rect>
+<rect class="sg" x="924.79" y="48.0" width="23.82" height="13" fill="#F1E05A" style="animation-delay:0.66s"><title>JavaScript: 5.3% em 7 repos</title></rect>
+<rect class="sg" x="948.61" y="48.0" width="16.81" height="13" fill="#8C97A3" style="animation-delay:0.75s"><title>C: 3.8% em 3 repos</title></rect>
+<rect class="sg" x="965.42" y="48.0" width="8.03" height="13" fill="#A78BFA" style="animation-delay:0.84s"><title>CSS: 1.8% em 6 repos</title></rect>
+<rect class="sg" x="973.45" y="48.0" width="4.55" height="13" fill="#22D3EE" style="animation-delay:0.93s"><title>PLpgSQL: 1.0% em 2 repos</title></rect>
+<g class="rw" style="animation-delay:0.60s"><circle cx="536.4" cy="84.0" r="4.4" fill="#3572A5"/><text class="lg" x="548.0" y="88.0">Python</text><text class="pc" x="739.0" y="88.0">53.2%</text></g>
+<g class="rw" style="animation-delay:0.66s"><circle cx="759.4" cy="84.0" r="4.4" fill="#3178C6"/><text class="lg" x="771.0" y="88.0">TypeScript</text><text class="pc" x="962.0" y="88.0">15.6%</text></g>
+<g class="rw" style="animation-delay:0.72s"><circle cx="536.4" cy="110.0" r="4.4" fill="#F34B7D"/><text class="lg" x="548.0" y="114.0">C++</text><text class="pc" x="739.0" y="114.0">10.0%</text></g>
+<g class="rw" style="animation-delay:0.78s"><circle cx="759.4" cy="110.0" r="4.4" fill="#E34C26"/><text class="lg" x="771.0" y="114.0">HTML</text><text class="pc" x="962.0" y="114.0">9.3%</text></g>
+<g class="rw" style="animation-delay:0.84s"><circle cx="536.4" cy="136.0" r="4.4" fill="#F1E05A"/><text class="lg" x="548.0" y="140.0">JavaScript</text><text class="pc" x="739.0" y="140.0">5.3%</text></g>
+<g class="rw" style="animation-delay:0.90s"><circle cx="759.4" cy="136.0" r="4.4" fill="#8C97A3"/><text class="lg" x="771.0" y="140.0">C</text><text class="pc" x="962.0" y="140.0">3.8%</text></g>
+<g class="rw" style="animation-delay:0.96s"><circle cx="536.4" cy="162.0" r="4.4" fill="#A78BFA"/><text class="lg" x="548.0" y="166.0">CSS</text><text class="pc" x="739.0" y="166.0">1.8%</text></g>
+<g class="rw" style="animation-delay:1.02s"><circle cx="759.4" cy="162.0" r="4.4" fill="#22D3EE"/><text class="lg" x="771.0" y="166.0">PLpgSQL</text><text class="pc" x="962.0" y="166.0">1.0%</text></g>
+<text class="nt" x="1000" y="205" transform="translate(-22 0)">peso por repositório, não por bytes</text>
+</svg>
