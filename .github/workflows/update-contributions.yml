@@ -24,6 +24,10 @@ jobs:
   heatmap:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      # O contexto `secrets` nao existe dentro de `if:` de step - so `env`.
+      # Por isso o segredo e promovido a variavel de ambiente aqui em cima.
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -45,9 +49,7 @@ jobs:
       # projetos. Sem um PAT pessoal em secrets.GH_TOKEN o cartao simplesmente
       # nao e regerado - fica o ultimo commitado, que esta certo.
       - name: Recalcula as linguagens
-        if: ${{ secrets.GH_TOKEN != '' }}
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        if: env.GH_TOKEN != ''
         run: |
           python scripts/fetch_stats.py ${{ github.repository_owner }}
           python scripts/render_stats_svg.py
