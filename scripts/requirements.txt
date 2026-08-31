@@ -1,10 +1,21 @@
-# usado pelo GitHub Actions (so o heatmap)
+# Isto e o que o GitHub Actions instala. So o grafico e o cartao de linguagens
+# rodam la; os dois precisam apenas destes dois pacotes.
 requests==2.32.3
 beautifulsoup4==4.12.3
 
-# so para regerar o retrato localmente (nao entra no workflow)
-# pillow
-# numpy
-# opencv-python-headless
-# rembg
-# onnxruntime
+# ------------------------------------------------------------------
+# Para regerar o RETRATO (prep_photo.py + make_portrait_svg.py) sao
+# necessarios os pacotes abaixo. Instale-os num ambiente virtual, nunca
+# no Python global: o rembg exige pillow >= 12 e isso quebra bibliotecas
+# comuns que ainda pedem pillow < 12.
+#
+#   python -m venv .venv
+#   .venv\Scripts\activate          (Windows)
+#   pip install pillow numpy opencv-python-headless rembg onnxruntime
+#   python scripts/prep_photo.py source-photo.jpg
+#   python scripts/make_portrait_svg.py
+#
+# prep_photo.py espera a foto original em source-photo.jpg na raiz do repo
+# (fora do versionamento) e escreve build/prepped-gray.png e
+# build/prepped-mask.png, que make_portrait_svg.py consome.
+# ------------------------------------------------------------------
