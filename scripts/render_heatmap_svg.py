@@ -30,24 +30,31 @@ COL_DELAY = 0.045
 ROW_DELAY = 0.09
 POP = 0.7
 
-# A revelacao se repete a cada CYCLE segundos. Nao da para disparar no hover:
-# o GitHub renderiza o SVG do README dentro de um <img>, e <img> nao entrega
-# evento de ponteiro para dentro do documento SVG - nem :hover do CSS, nem
-# begin="mouseover" do SMIL chegam la. Repetir e a unica forma de quem esta
-# olhando ver a animacao de novo sem recarregar a pagina.
-CYCLE = 5.0
+# A revelacao se repete. Nao da para disparar no hover: o GitHub renderiza o SVG
+# do README dentro de um <img>, e <img> nao entrega evento de ponteiro para
+# dentro do documento SVG - nem :hover do CSS, nem begin="mouseover" do SMIL
+# chegam la. Repetir e a unica forma de quem esta olhando ver a animacao de
+# novo sem recarregar a pagina.
+HOLD = 3.0       # segundos com a grade inteira no ar antes de recomecar
+OUT = 1.4        # quanto cada celula demora para se recolher
 
 
-def keyframes() -> dict:
-    """Converte os tempos do pop em porcentagens do ciclo inteiro."""
+def keyframes(max_delay: float) -> dict:
+    """Monta o ciclo a partir do tempo de pausa desejado.
+
+    O ciclo e por celula, mas o atraso da diagonal desloca todas as fases junto,
+    entao a pausa que o visitante ve com a grade cheia e exatamente HOLD: ela
+    so comeca a sair depois que a ultima celula terminou de entrar.
+    """
+    cycle = max_delay + POP + HOLD + OUT
     return {
-        "cycle": CYCLE,
-        "up": 100 * POP * 0.7 / CYCLE,      # fim do overshoot
-        "settle": 100 * POP / CYCLE,        # celula assentada
-        "hold": 100 * (CYCLE - 1.4) / CYCLE,  # comeca a sair
-        "gone": 100 * (CYCLE - 0.5) / CYCLE,
-        "spark_on": 100 * 0.45 / CYCLE,
-        "spark_off": 100 * 1.6 / CYCLE,
+        "cycle": round(cycle, 2),
+        "up": 100 * POP * 0.7 / cycle,        # fim do overshoot
+        "settle": 100 * POP / cycle,          # celula assentada
+        "hold": 100 * (cycle - OUT) / cycle,  # comeca a sair
+        "gone": 100 * (cycle - 0.5) / cycle,
+        "spark_on": 100 * 0.45 / cycle,
+        "spark_off": 100 * 1.6 / cycle,
     }
 
 MONTHS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
@@ -73,6 +80,8 @@ def build(data: dict, theme_name: str) -> str:
     grid_x = PAD + LABEL_COL
     grid_y = TOP + 18
     height = int(grid_y + 7 * STEP + 46)
+
+    max_delay = max(c * COL_DELAY + r * ROW_DELAY for c, r, _ in cells)
 
     rects = []
     for col, row, d in cells:
@@ -123,7 +132,7 @@ def build(data: dict, theme_name: str) -> str:
                  s["best_day"]["count"]))
 
     return TEMPLATE.format(
-        W=W, H=height, PAD=PAD, MONO=MONO, POP=POP, **keyframes(),
+        W=W, H=height, PAD=PAD, MONO=MONO, POP=POP, **keyframes(max_delay),
         text=t["text"], muted=t["muted"], chrome=t["chrome"],
         rects="\n".join(rects), months="\n".join(labels), weekdays=wd,
         legend="\n".join(legend), footer=footer, footer_y=base_y,
