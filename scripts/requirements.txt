@@ -1,0 +1,10 @@
+# usado pelo GitHub Actions (so o heatmap)
+requests==2.32.3
+beautifulsoup4==4.12.3
+
+# so para regerar o retrato localmente (nao entra no workflow)
+# pillow
+# numpy
+# opencv-python-headless
+# rembg
+# onnxruntime
