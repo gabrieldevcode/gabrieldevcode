@@ -15,18 +15,16 @@ Na prática isso vira **instrumentação embarcada**, **agentes de IA ligados a 
 
 <div align="center">
 
+<!--
+  O logo do LinkedIn no shields.io só aparece no azul da marca (#0A66C2).
+  Em qualquer outra cor o ícone some e sobra só a palavra — por isso este
+  badge é o único que não segue a paleta.
+-->
+<a href="https://www.linkedin.com/in/gabriel-barreto-br/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+&nbsp;&nbsp;
 <a href="mailto:contato.gabrielrobalinho@gmail.com"><img src="https://img.shields.io/badge/E--mail-0A0E14?style=for-the-badge&logo=gmail&logoColor=2DD4BF&labelColor=0A0E14" alt="E-mail"></a>
 &nbsp;&nbsp;
 <a href="https://github.com/gabrieldevcode?tab=repositories"><img src="https://img.shields.io/badge/Repositórios-0A0E14?style=for-the-badge&logo=git&logoColor=F5A524&labelColor=0A0E14" alt="Repositórios"></a>
-
-<!--
-  LINKEDIN — descomente e troque SEU-ID pelo final da sua URL do LinkedIn.
-  O logo do LinkedIn no shields.io só aparece no azul da marca (#0A66C2);
-  em qualquer outra cor o ícone some e sobra só o texto. Por isso este fica azul.
-
-  &nbsp;&nbsp;
-  <a href="https://www.linkedin.com/in/SEU-ID/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
--->
 
 </div>
 
@@ -123,17 +121,17 @@ Preenche declarações de IR a partir do banco de dados via controle de mouse e 
 
 ---
 
-## Números
+## Linguagens
 
 <div align="center">
 
-<img width="49%" alt="Estatísticas do GitHub" src="https://github-readme-stats.vercel.app/api?username=gabrieldevcode&show_icons=true&include_all_commits=true&count_private=true&hide_rank=true&hide_border=true&title_color=2DD4BF&icon_color=F5A524&text_color=7D8590&bg_color=00000000&card_width=480">
-<img width="49%" alt="Linguagens mais usadas" src="https://github-readme-stats.vercel.app/api/top-langs/?username=gabrieldevcode&layout=compact&langs_count=8&hide_border=true&title_color=2DD4BF&text_color=7D8590&bg_color=00000000&card_width=480">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/langs-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/langs-light.svg">
+  <img alt="Linguagens mais usadas" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/langs-light.svg" width="100%">
+</picture>
 
 </div>
-
-> O *rank* em letra está escondido de propósito: ele é pesado por estrelas e seguidores,
-> então mede popularidade de repositório, não trabalho feito.
 
 ---
 

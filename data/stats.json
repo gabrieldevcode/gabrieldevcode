@@ -1,0 +1,56 @@
+{
+ "user": "gabrieldevcode",
+ "generated_at": "2026-08-30",
+ "counts": {
+  "repos": 24,
+  "repos_with_code": 22,
+  "public_repos": 12,
+  "private_repos": 12,
+  "stars": 15,
+  "followers": 0,
+  "since": "2022"
+ },
+ "languages": [
+  {
+   "name": "Python",
+   "share": 53.25,
+   "repos": 15
+  },
+  {
+   "name": "TypeScript",
+   "share": 15.56,
+   "repos": 5
+  },
+  {
+   "name": "C++",
+   "share": 9.98,
+   "repos": 5
+  },
+  {
+   "name": "HTML",
+   "share": 9.28,
+   "repos": 7
+  },
+  {
+   "name": "JavaScript",
+   "share": 5.34,
+   "repos": 7
+  },
+  {
+   "name": "C",
+   "share": 3.77,
+   "repos": 3
+  },
+  {
+   "name": "CSS",
+   "share": 1.8,
+   "repos": 6
+  },
+  {
+   "name": "PLpgSQL",
+   "share": 1.02,
+   "repos": 2
+  }
+ ],
+ "metric": "media das distribuicoes por repositorio"
+}

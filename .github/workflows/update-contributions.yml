@@ -1,7 +1,7 @@
-name: Atualiza o grafico de contribuicoes
+name: Atualiza os assets do perfil
 
-# O retrato e estatico (so muda quando a foto muda). O unico asset vivo e o
-# heatmap, entao so ele roda no cron.
+# O retrato e estatico (so muda quando a foto muda). O que vive sao o grafico de
+# contribuicoes e o cartao de linguagens.
 "on":
   schedule:
     - cron: "17 6 * * *"      # ~03:17 no horario de Brasilia
@@ -37,10 +37,25 @@ jobs:
       - name: Baixa o calendario publico de contribuicoes
         run: python scripts/fetch_contributions.py ${{ github.repository_owner }}
 
-      - name: Redesenha os SVGs
+      - name: Redesenha o grafico
         run: python scripts/render_heatmap_svg.py
+
+      # O GITHUB_TOKEN padrao so enxerga ESTE repositorio, entao /user/repos
+      # devolveria so os publicos e o cartao de linguagens perderia metade dos
+      # projetos. Sem um PAT pessoal em secrets.GH_TOKEN o cartao simplesmente
+      # nao e regerado - fica o ultimo commitado, que esta certo.
+      - name: Recalcula as linguagens
+        if: ${{ secrets.GH_TOKEN != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          python scripts/fetch_stats.py ${{ github.repository_owner }}
+          python scripts/render_stats_svg.py
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: atualiza o grafico de contribuicoes [skip ci]"
-          file_pattern: "data/contributions.json assets/contrib-dark.svg assets/contrib-light.svg"
+          commit_message: "chore: atualiza os assets do perfil [skip ci]"
+          file_pattern: >-
+            data/contributions.json data/stats.json
+            assets/contrib-dark.svg assets/contrib-light.svg
+            assets/langs-dark.svg assets/langs-light.svg
