@@ -62,6 +62,51 @@ def all_repos(s: requests.Session, user: str) -> list:
     raise SystemExit("nao consegui listar os repositorios de %s" % user)
 
 
+GRAPHQL = """
+query($login:String!, $from:DateTime!, $to:DateTime!) {
+  user(login:$login) {
+    pullRequests { totalCount }
+    issues { totalCount }
+    repositoriesContributedTo(
+      contributionTypes:[COMMIT, PULL_REQUEST, ISSUE, REPOSITORY]
+    ) { totalCount }
+    contributionsCollection(from:$from, to:$to) {
+      totalCommitContributions
+      restrictedContributionsCount
+    }
+  }
+}
+"""
+
+
+def totals(s: requests.Session, user: str, since_year: int) -> dict:
+    """Numeros que so a GraphQL entrega, e so com um token pessoal.
+
+    A REST nao expõe commits totais nem contribuicoes privadas. Sem token isto
+    devolve {} e o cartao cai para o que ja estava commitado.
+    """
+    if "Authorization" not in s.headers:
+        return {}
+    out = {"commits": 0}
+    this_year = date.today().year
+    for year in range(since_year, this_year + 1):
+        body = {"query": GRAPHQL, "variables": {
+            "login": user,
+            "from": "%d-01-01T00:00:00Z" % year,
+            "to": "%d-01-01T00:00:00Z" % (year + 1),
+        }}
+        r = s.post("https://api.github.com/graphql", json=body, timeout=30)
+        if r.status_code != 200 or "errors" in r.json():
+            return {}
+        u = r.json()["data"]["user"]
+        cc = u["contributionsCollection"]
+        out["commits"] += cc["totalCommitContributions"] + cc["restrictedContributionsCount"]
+        out["prs"] = u["pullRequests"]["totalCount"]
+        out["issues"] = u["issues"]["totalCount"]
+        out["contributed_to"] = u["repositoriesContributedTo"]["totalCount"]
+    return out
+
+
 def main() -> None:
     user = sys.argv[1] if len(sys.argv) > 1 else USER
     s = session()
@@ -98,6 +143,9 @@ def main() -> None:
     ranked = sorted(langs.items(), key=lambda kv: -kv[1])
     private = sum(1 for r in repos if r.get("private"))
 
+    since_year = int(me.get("created_at", "2022")[:4])
+    extra = totals(s, user, since_year)
+
     data = {
         "user": user,
         "generated_at": date.today().isoformat(),
@@ -109,6 +157,10 @@ def main() -> None:
             "stars": stars,
             "followers": me.get("followers", 0),
             "since": me.get("created_at", "")[:4],
+            "commits": extra.get("commits"),
+            "prs": extra.get("prs"),
+            "issues": extra.get("issues"),
+            "contributed_to": extra.get("contributed_to"),
         },
         "languages": [
             {"name": n, "share": round(100 * w / total, 2), "repos": repo_count[n]}
