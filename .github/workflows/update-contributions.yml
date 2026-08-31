@@ -1,7 +1,7 @@
 name: Atualiza os assets do perfil
 
-# O retrato e estatico (so muda quando a foto muda). O que vive sao o grafico de
-# contribuicoes e o cartao de linguagens.
+# O retrato e o rodape sao estaticos (so mudam quando a foto ou a frase mudam).
+# O que vive sao o grafico de contribuicoes, os numeros e os cards de projeto.
 "on":
   schedule:
     - cron: "17 6 * * *"      # ~03:17 no horario de Brasilia
@@ -9,19 +9,20 @@ name: Atualiza os assets do perfil
   push:
     branches: [main]
     paths:
-      - "scripts/fetch_contributions.py"
-      - "scripts/render_heatmap_svg.py"
+      - "scripts/fetch_*.py"
+      - "scripts/render_*.py"
+      - "scripts/theme.py"
       - ".github/workflows/update-contributions.yml"
 
 permissions:
   contents: write
 
 concurrency:
-  group: contrib-graph
+  group: profile-assets
   cancel-in-progress: true
 
 jobs:
-  heatmap:
+  assets:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
@@ -35,7 +36,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Instala as dependencias do heatmap
+      - name: Instala as dependencias
         run: pip install requests==2.32.3 beautifulsoup4==4.12.3
 
       - name: Baixa o calendario publico de contribuicoes
@@ -44,11 +45,17 @@ jobs:
       - name: Redesenha o grafico
         run: python scripts/render_heatmap_svg.py
 
+      - name: Atualiza os cards de projeto
+        run: |
+          python scripts/fetch_projects.py ${{ github.repository_owner }}
+          python scripts/render_projects_svg.py
+
       # O GITHUB_TOKEN padrao so enxerga ESTE repositorio, entao /user/repos
-      # devolveria so os publicos e o cartao de linguagens perderia metade dos
-      # projetos. Sem um PAT pessoal em secrets.GH_TOKEN o cartao simplesmente
-      # nao e regerado - fica o ultimo commitado, que esta certo.
-      - name: Recalcula as linguagens
+      # devolveria so os publicos: o cartao perderia metade dos projetos e a
+      # GraphQL nao entregaria commits totais. Sem um PAT pessoal em
+      # secrets.GH_TOKEN este passo e pulado e fica o ultimo cartao commitado,
+      # que esta correto.
+      - name: Recalcula numeros e linguagens
         if: env.GH_TOKEN != ''
         run: |
           python scripts/fetch_stats.py ${{ github.repository_owner }}
@@ -57,7 +64,4 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: atualiza os assets do perfil [skip ci]"
-          file_pattern: >-
-            data/contributions.json data/stats.json
-            assets/contrib-dark.svg assets/contrib-light.svg
-            assets/langs-dark.svg assets/langs-light.svg
+          file_pattern: "data/*.json assets/*.svg assets/projects/*.svg"

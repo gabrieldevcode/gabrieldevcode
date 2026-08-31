@@ -15,18 +15,19 @@ Na prática isso vira **instrumentação embarcada**, **agentes de IA ligados a 
 
 <div align="center">
 
-<!--
-  O logo do LinkedIn no shields.io só aparece no azul da marca (#0A66C2).
-  Em qualquer outra cor o ícone some e sobra só a palavra — por isso este
-  badge é o único que não segue a paleta.
--->
-<a href="https://www.linkedin.com/in/gabriel-barreto-br/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+<a href="https://www.linkedin.com/in/gabriel-barreto-br/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
 &nbsp;&nbsp;
-<a href="mailto:contato.gabrielrobalinho@gmail.com"><img src="https://img.shields.io/badge/E--mail-0A0E14?style=for-the-badge&logo=gmail&logoColor=2DD4BF&labelColor=0A0E14" alt="E-mail"></a>
+<a href="mailto:contato.gabrielrobalinho@gmail.com"><img src="https://img.shields.io/badge/E--mail-0A101F?style=for-the-badge&logo=gmail&logoColor=10B981&labelColor=0A101F" alt="E-mail" /></a>
 &nbsp;&nbsp;
-<a href="https://github.com/gabrieldevcode?tab=repositories"><img src="https://img.shields.io/badge/Repositórios-0A0E14?style=for-the-badge&logo=git&logoColor=F5A524&labelColor=0A0E14" alt="Repositórios"></a>
+<a href="https://github.com/gabrieldevcode?tab=repositories"><img src="https://img.shields.io/badge/Repositórios-0A101F?style=for-the-badge&logo=github&logoColor=22D3EE&labelColor=0A101F" alt="Repositórios" /></a>
 
 </div>
+
+<!--
+  O logo do LinkedIn no shields.io só aparece no azul da marca (#0A66C2).
+  Em qualquer outra cor o ícone some e sobra só a palavra — por isso esse badge
+  é o único que não segue a paleta.
+-->
 
 ---
 
@@ -38,98 +39,48 @@ Na prática isso vira **instrumentação embarcada**, **agentes de IA ligados a 
   <img alt="Gráfico de contribuições" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/contrib-light.svg" width="100%">
 </picture>
 
+<br/><br/>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/stats-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/stats-light.svg">
+  <img alt="Números do GitHub e linguagens mais usadas" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/stats-light.svg" width="100%">
+</picture>
+
 </div>
 
 ---
 
 ## Projetos em destaque
 
-<table>
-<tr>
-<td width="50%" valign="top">
-
-### Synapsis
-Gerenciador de estudos por **repetição espaçada** no terminal. Monta a fila de revisão a
-partir do domínio do aluno e do tempo desde o cadastro. Python puro, sem dependências.
-
-`Python` `CLI` `Algoritmos`
-
-[Ver repositório →](https://github.com/gabrieldevcode/synapsis)
-
-</td>
-<td width="50%" valign="top">
-
-### Claude Usage Stick — CYD
-Porte do medidor de uso da API para a **ESP32-2432S028**: ESP32 clássico, 4 MB de flash,
-sem PSRAM, tela ST7789 320×240 e touch XPT2046.
-
-`C` `ESP32` `LVGL` `ST7789`
-
-[Ver repositório →](https://github.com/gabrieldevcode/claude-usage)
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-### Amigo Rotineiro
-Assistente pessoal com **IA (Gemini)** integrado ao Google Calendar: detecta intenções
-e responde pelo terminal.
-
-`Python` `LLM` `Google Calendar`
-
-[Ver repositório →](https://github.com/gabrieldevcode/Amigo_Rotineiro)
-
-</td>
-<td width="50%" valign="top">
-
-### Automação DIMOB 2.0
-Robô que preenche a DIMOB na Receita Federal. Versão modular, com detecção de mês por
-data, digitação adaptativa e reconhecimento de imagem para achar campos na tela.
-
-`Python` `RPA` `Visão computacional`
-
-[Ver repositório →](https://github.com/gabrieldevcode/Automacao_Dimob_2.0)
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-### Encaminhamento de exames (ASO)
-Extrai dados de mensagens de clientes com **LLM** e gera as guias de encaminhamento
-médico já preenchidas em Word.
-
-`Python` `LLM` `docx`
-
-[Ver repositório →](https://github.com/gabrieldevcode/Automacao_Encaminhamento_Exame)
-
-</td>
-<td width="50%" valign="top">
-
-### Automação do Imposto de Renda
-Preenche declarações de IR a partir do banco de dados via controle de mouse e teclado.
-**Em produção** num escritório de contabilidade.
-
-`Python` `RPA` `Automação`
-
-[Ver repositório →](https://github.com/gabrieldevcode/Automacao-Imposto-de-Renda)
-
-</td>
-</tr>
-</table>
-
----
-
-## Linguagens
-
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/langs-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/langs-light.svg">
-  <img alt="Linguagens mais usadas" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/langs-light.svg" width="100%">
-</picture>
+<a href="https://github.com/gabrieldevcode/synapsis"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/synapsis-dark.svg">
+  <img alt="Synapsis" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/synapsis-light.svg" width="49%">
+</picture></a>
+<a href="https://github.com/gabrieldevcode/claude-usage"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/claude-usage-dark.svg">
+  <img alt="Claude Usage Stick" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/claude-usage-light.svg" width="49%">
+</picture></a>
+
+<a href="https://github.com/gabrieldevcode/Amigo_Rotineiro"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/Amigo_Rotineiro-dark.svg">
+  <img alt="Amigo Rotineiro" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/Amigo_Rotineiro-light.svg" width="49%">
+</picture></a>
+<a href="https://github.com/gabrieldevcode/Automacao_Dimob_2.0"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/Automacao_Dimob_2.0-dark.svg">
+  <img alt="Automação DIMOB 2.0" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/Automacao_Dimob_2.0-light.svg" width="49%">
+</picture></a>
+
+<a href="https://github.com/gabrieldevcode/Automacao_Encaminhamento_Exame"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/Automacao_Encaminhamento_Exame-dark.svg">
+  <img alt="Encaminhamento ASO" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/Automacao_Encaminhamento_Exame-light.svg" width="49%">
+</picture></a>
+<a href="https://github.com/gabrieldevcode/Automacao-Imposto-de-Renda"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/Automacao-Imposto-de-Renda-dark.svg">
+  <img alt="Automação do IR" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/projects/Automacao-Imposto-de-Renda-light.svg" width="49%">
+</picture></a>
 
 </div>
 
@@ -139,14 +90,23 @@ Preenche declarações de IR a partir do banco de dados via controle de mouse e 
 
 <div align="center">
 
-**Embarcados**  
-`ESP32` · `ESP32-S3` · `RP2040` · `Arduino` · `I²C` · `SPI` · `UART` · `LVGL` · `NFC/RFID` · `MPU-6050`
+**Embarcados e eletrônica**
 
-**Software**  
-`Python` · `C` · `C++` · `TypeScript` · `React` · `Next.js` · `Supabase` · `Linux` · `Git` · `Docker`
+<img src="https://skillicons.dev/icons?i=arduino,raspberrypi,c,cpp,cmake,platformio&theme=dark" alt="Arduino, Raspberry Pi, C, C++, CMake, PlatformIO" />
 
-**IA e automação**  
-`MCP` · `FastMCP` · `Agentes` · `OpenAI` · `Gemini` · `RPA` · `Visão computacional`
+`ESP32` · `ESP32-S3` · `RP2040` · `I²C` · `SPI` · `UART` · `LVGL` · `NFC/RFID` · `MPU-6050` · `ST7789`
+
+<br/>
+
+**Software**
+
+<img src="https://skillicons.dev/icons?i=python,ts,js,react,nextjs,supabase,postgres,linux,git,docker,vscode,figma&theme=dark" alt="Python, TypeScript, JavaScript, React, Next.js, Supabase, PostgreSQL, Linux, Git, Docker, VS Code, Figma" />
+
+<br/>
+
+**IA e automação**
+
+`MCP` · `FastMCP` · `Claude Code` · `Agentes multi-passo` · `OpenAI` · `Gemini` · `RPA` · `Visão computacional`
 
 </div>
 
@@ -164,15 +124,13 @@ Explorando agora: `IA embarcada` · `Edge computing` · `Agentes de IA` · `Inst
 
 <div align="center">
 
-<br>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/footer-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/footer-light.svg">
+  <img alt="Eletrônica → Software → Inteligência" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/footer-light.svg" width="100%">
+</picture>
 
-### Eletrônica → Software → Inteligência
-
-Aberto a estágio, pesquisa e projetos de engenharia.
-
-<br>
-
-<sub>O retrato e o gráfico acima são SVGs gerados pelos scripts em <a href="./scripts">scripts/</a> —
-o gráfico se atualiza sozinho todo dia por GitHub Actions.</sub>
+<sub>Todos os SVGs desta página são gerados pelos scripts em <a href="./scripts">scripts/</a> —
+o gráfico e os números se atualizam sozinhos todo dia por GitHub Actions.</sub>
 
 </div>
