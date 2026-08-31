@@ -35,7 +35,7 @@ POP = 0.7
 # evento de ponteiro para dentro do documento SVG - nem :hover do CSS, nem
 # begin="mouseover" do SMIL chegam la. Repetir e a unica forma de quem esta
 # olhando ver a animacao de novo sem recarregar a pagina.
-CYCLE = 15.0
+CYCLE = 5.0
 
 
 def keyframes() -> dict:
