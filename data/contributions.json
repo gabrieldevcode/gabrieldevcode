@@ -1836,7 +1836,7 @@
   "total": 321,
   "days_tracked": 366,
   "active_days": 32,
-  "current_streak": 0,
+  "current_streak": 14,
   "longest_streak": 14,
   "best_day": {
    "date": "2026-06-09",
@@ -1845,5 +1845,5 @@
   "first_date": "2025-08-31",
   "last_date": "2026-08-31"
  },
- "generated_at": "2026-08-30"
+ "generated_at": "2026-08-31"
 }
