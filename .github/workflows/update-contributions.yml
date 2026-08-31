@@ -1,0 +1,46 @@
+name: Atualiza o grafico de contribuicoes
+
+# O retrato e estatico (so muda quando a foto muda). O unico asset vivo e o
+# heatmap, entao so ele roda no cron.
+"on":
+  schedule:
+    - cron: "17 6 * * *"      # ~03:17 no horario de Brasilia
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "scripts/fetch_contributions.py"
+      - "scripts/render_heatmap_svg.py"
+      - ".github/workflows/update-contributions.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: contrib-graph
+  cancel-in-progress: true
+
+jobs:
+  heatmap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instala as dependencias do heatmap
+        run: pip install requests==2.32.3 beautifulsoup4==4.12.3
+
+      - name: Baixa o calendario publico de contribuicoes
+        run: python scripts/fetch_contributions.py ${{ github.repository_owner }}
+
+      - name: Redesenha os SVGs
+        run: python scripts/render_heatmap_svg.py
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: atualiza o grafico de contribuicoes [skip ci]"
+          file_pattern: "data/contributions.json assets/contrib-dark.svg assets/contrib-light.svg"
