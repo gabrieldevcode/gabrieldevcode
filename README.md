@@ -22,6 +22,7 @@
 <a href="https://github.com/gabrieldevcode?tab=repositories"><img src="https://img.shields.io/badge/Repositórios-0A101F?style=for-the-badge&logo=github&logoColor=22D3EE&labelColor=0A101F" alt="Repositórios" /></a>
 
 </div>
+<br/><br/>
 
 <!--
   O logo do LinkedIn no shields.io só aparece no azul da marca (#0A66C2).
