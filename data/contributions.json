@@ -1829,12 +1829,17 @@
   {
    "date": "2026-08-31",
    "level": 1,
-   "count": 3
+   "count": 7
+  },
+  {
+   "date": "2026-09-01",
+   "level": 0,
+   "count": 0
   }
  ],
  "stats": {
-  "total": 339,
-  "days_tracked": 366,
+  "total": 343,
+  "days_tracked": 367,
   "active_days": 33,
   "current_streak": 15,
   "longest_streak": 15,
@@ -1843,7 +1848,7 @@
    "count": 34
   },
   "first_date": "2025-08-31",
-  "last_date": "2026-08-31"
+  "last_date": "2026-09-01"
  },
- "generated_at": "2026-08-31"
+ "generated_at": "2026-09-01"
 }
