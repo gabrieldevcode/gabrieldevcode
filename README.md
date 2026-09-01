@@ -129,7 +129,5 @@ Explorando agora: `IA embarcada` · `Edge computing` · `Agentes de IA` · `Inst
   <img alt="Eletrônica → Software → Inteligência" src="https://raw.githubusercontent.com/gabrieldevcode/gabrieldevcode/main/assets/footer-light.svg" width="100%">
 </picture>
 
-<sub>Todos os SVGs desta página são gerados pelos scripts em <a href="./scripts">scripts/</a> —
-o gráfico e os números se atualizam sozinhos todo dia por GitHub Actions.</sub>
 
 </div>
