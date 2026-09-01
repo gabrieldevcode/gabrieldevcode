@@ -115,8 +115,6 @@
 
 ## Um pouco mais
 
-**Universidade Federal do Rio de Janeiro** · Engenharia Eletrônica e de Computação · 2025–2030
-
 Também participo de pesquisa ligada a **Avaliação de Ciclo de Vida (ACV)**, automação e
 ferramentas open-source de engenharia. Antes da faculdade, vim da **robótica competitiva** —
 FLL e F1 in Schools.
