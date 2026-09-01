@@ -8,7 +8,7 @@
 
 </div>
 
-Estudo Engenharia Eletrônica e de Computação na **UFRJ** e construo sistemas completos —
+Estudante de Engenharia Eletrônica e de Computação pela **UFRJ**, desenvolvedor de sistemas que  —
 do sensor e do microcontrolador até o software, os dados e o comportamento inteligente em cima deles.
 Na prática isso vira **instrumentação embarcada**, **agentes de IA ligados a ferramentas reais** e
 **automações em Python que rodam em produção** dentro de escritórios de verdade.
