@@ -778,7 +778,7 @@
   },
   {
    "date": "2026-02-02",
-   "level": 2,
+   "level": 1,
    "count": 8
   },
   {
@@ -793,7 +793,7 @@
   },
   {
    "date": "2026-02-05",
-   "level": 2,
+   "level": 1,
    "count": 8
   },
   {
@@ -1418,7 +1418,7 @@
   },
   {
    "date": "2026-06-10",
-   "level": 3,
+   "level": 2,
    "count": 17
   },
   {
@@ -1438,7 +1438,7 @@
   },
   {
    "date": "2026-06-14",
-   "level": 2,
+   "level": 1,
    "count": 8
   },
   {
@@ -1764,12 +1764,12 @@
   {
    "date": "2026-08-18",
    "level": 1,
-   "count": 4
+   "count": 8
   },
   {
    "date": "2026-08-19",
-   "level": 1,
-   "count": 5
+   "level": 2,
+   "count": 10
   },
   {
    "date": "2026-08-20",
@@ -1783,7 +1783,7 @@
   },
   {
    "date": "2026-08-22",
-   "level": 3,
+   "level": 2,
    "count": 17
   },
   {
@@ -1803,22 +1803,22 @@
   },
   {
    "date": "2026-08-26",
-   "level": 3,
+   "level": 2,
    "count": 13
   },
   {
    "date": "2026-08-27",
    "level": 4,
-   "count": 24
+   "count": 31
   },
   {
    "date": "2026-08-28",
-   "level": 4,
+   "level": 3,
    "count": 19
   },
   {
    "date": "2026-08-29",
-   "level": 3,
+   "level": 2,
    "count": 14
   },
   {
@@ -1828,37 +1828,42 @@
   },
   {
    "date": "2026-08-31",
-   "level": 3,
-   "count": 18
+   "level": 4,
+   "count": 29
   },
   {
    "date": "2026-09-01",
    "level": 4,
-   "count": 19
+   "count": 35
   },
   {
    "date": "2026-09-02",
-   "level": 1,
-   "count": 5
+   "level": 2,
+   "count": 9
   },
   {
    "date": "2026-09-03",
+   "level": 3,
+   "count": 26
+  },
+  {
+   "date": "2026-09-04",
    "level": 0,
    "count": 0
   }
  ],
  "stats": {
-  "total": 385,
-  "days_tracked": 369,
-  "active_days": 35,
-  "current_streak": 17,
-  "longest_streak": 17,
+  "total": 458,
+  "days_tracked": 370,
+  "active_days": 36,
+  "current_streak": 18,
+  "longest_streak": 18,
   "best_day": {
-   "date": "2026-06-09",
-   "count": 34
+   "date": "2026-09-01",
+   "count": 35
   },
   "first_date": "2025-08-31",
-  "last_date": "2026-09-03"
+  "last_date": "2026-09-04"
  },
- "generated_at": "2026-09-03"
+ "generated_at": "2026-09-04"
 }
