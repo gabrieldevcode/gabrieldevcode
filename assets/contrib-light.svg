@@ -13,22 +13,22 @@
      diagonal, sem fim. O easing vai dentro dos keyframes porque o `linear` da
      declaracao vale para o ciclo inteiro. */
   .c { opacity:0; transform-box:fill-box; transform-origin:center;
-        animation: pop 7.94s linear infinite both; }
-  .hi { animation: pop 7.94s linear infinite both,
-                    spark 7.94s linear infinite both; }
+        animation: pop 7.98s linear infinite both; }
+  .hi { animation: pop 7.98s linear infinite both,
+                    spark 7.98s linear infinite both; }
   @keyframes pop {
     0%       { opacity:0; transform:scale(.2) translateY(-7px);
                 animation-timing-function: cubic-bezier(.2,.8,.3,1.2) }
-    6.18%    { opacity:1; transform:scale(1.14) }
-    8.82%  { opacity:1; transform:scale(1) }
-    82.36%  { opacity:1; transform:scale(1);
+    6.14%    { opacity:1; transform:scale(1.14) }
+    8.77%  { opacity:1; transform:scale(1) }
+    82.46%  { opacity:1; transform:scale(1);
                 animation-timing-function: cubic-bezier(.5,0,.75,0) }
-    93.70%  { opacity:0; transform:scale(.7) }
+    93.73%  { opacity:0; transform:scale(.7) }
     100%     { opacity:0; transform:scale(.2) }
   }
   @keyframes spark {
-    0%,5.67%   { filter:brightness(2.2) }
-    20.16%,100% { filter:brightness(1) }
+    0%,5.64%   { filter:brightness(2.2) }
+    20.05%,100% { filter:brightness(1) }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -37,7 +37,7 @@
 </style>
 
 <text class="ttl" x="20" y="24">gabrieldevcode@github ~ $ git log --graph --all</text>
-<text class="upd" x="1000" y="24" text-anchor="end" transform="translate(-20 0)">atualizado em 2026-09-04</text>
+<text class="upd" x="1000" y="24" text-anchor="end" transform="translate(-20 0)">atualizado em 2026-09-05</text>
 
 <text class="mo" x="60.0" y="52">Ago</text>
 <text class="mo" x="147.0" y="52">Out</text>
@@ -422,7 +422,8 @@
 <rect class="c hi" x="964.8" y="96.8" width="14.2" height="14.2" rx="3.4" fill="#0E5D73" style="animation-delay:2.52s"><title>2026-09-01: 35</title></rect>
 <rect class="c" x="964.8" y="114.2" width="14.2" height="14.2" rx="3.4" fill="#67E8F9" style="animation-delay:2.61s"><title>2026-09-02: 9</title></rect>
 <rect class="c hi" x="964.8" y="131.6" width="14.2" height="14.2" rx="3.4" fill="#0891B2" style="animation-delay:2.70s"><title>2026-09-03: 26</title></rect>
-<rect class="c" x="964.8" y="149.0" width="14.2" height="14.2" rx="3.4" fill="#EBEDF0" style="animation-delay:2.79s"><title>2026-09-04: 0</title></rect>
+<rect class="c" x="964.8" y="149.0" width="14.2" height="14.2" rx="3.4" fill="#CFFAFE" style="animation-delay:2.79s"><title>2026-09-04: 6</title></rect>
+<rect class="c" x="964.8" y="166.4" width="14.2" height="14.2" rx="3.4" fill="#EBEDF0" style="animation-delay:2.88s"><title>2026-09-05: 0</title></rect>
 <text class="lg" x="863.0" y="207.0" text-anchor="end">menos</text>
 <rect x="871.0" y="197.5" width="11" height="11" rx="2.6" fill="#EBEDF0"/>
 <rect x="887.0" y="197.5" width="11" height="11" rx="2.6" fill="#CFFAFE"/>
@@ -430,5 +431,5 @@
 <rect x="919.0" y="197.5" width="11" height="11" rx="2.6" fill="#0891B2"/>
 <rect x="935.0" y="197.5" width="11" height="11" rx="2.6" fill="#0E5D73"/>
 <text class="lg" x="980" y="207.0" text-anchor="end">mais</text>
-<text class="ft" x="20" y="207">458 contribuições no último ano  ·  36 dias ativos  ·  maior sequência 18 dias  ·  melhor dia 35</text>
+<text class="ft" x="20" y="207">464 contribuições no último ano  ·  37 dias ativos  ·  maior sequência 19 dias  ·  melhor dia 35</text>
 </svg>
