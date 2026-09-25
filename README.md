@@ -101,8 +101,7 @@
 
 **Software**
 
-<img src="https://skillicons.dev/icons?i=python,ts,js,react,nextjs,supabase,postgres,linux,git,docker,vscode, TypeScript, JavaScript, React, Next.js, Supabase, PostgreSQL, Linux, Git, Docker, VS Code, Figma" />
-
+<img src="https://skillicons.dev/icons?i=python,ts,js,react,nextjs,supabase,postgres,linux,git,docker,vscode,figma&theme=dark" alt="Python, TypeScript, JavaScript, React, Next.js, Supabase, PostgreSQL, Linux, Git, Docker, VS Code, Figma" />
 <br/>
 
 **IA e automação**
