@@ -2,41 +2,6 @@
  "user": "gabrieldevcode",
  "days": [
   {
-   "date": "2025-09-21",
-   "level": 0,
-   "count": 0
-  },
-  {
-   "date": "2025-09-22",
-   "level": 0,
-   "count": 0
-  },
-  {
-   "date": "2025-09-23",
-   "level": 0,
-   "count": 0
-  },
-  {
-   "date": "2025-09-24",
-   "level": 0,
-   "count": 0
-  },
-  {
-   "date": "2025-09-25",
-   "level": 0,
-   "count": 0
-  },
-  {
-   "date": "2025-09-26",
-   "level": 0,
-   "count": 0
-  },
-  {
-   "date": "2025-09-27",
-   "level": 0,
-   "count": 0
-  },
-  {
    "date": "2025-09-28",
    "level": 0,
    "count": 0
@@ -1853,22 +1818,27 @@
   },
   {
    "date": "2026-09-26",
+   "level": 1,
+   "count": 1
+  },
+  {
+   "date": "2026-09-27",
    "level": 0,
    "count": 0
   }
  ],
  "stats": {
-  "total": 1148,
-  "days_tracked": 371,
-  "active_days": 58,
-  "current_streak": 40,
-  "longest_streak": 40,
+  "total": 1149,
+  "days_tracked": 365,
+  "active_days": 59,
+  "current_streak": 41,
+  "longest_streak": 41,
   "best_day": {
    "date": "2026-09-09",
    "count": 186
   },
-  "first_date": "2025-09-21",
-  "last_date": "2026-09-26"
+  "first_date": "2025-09-28",
+  "last_date": "2026-09-27"
  },
- "generated_at": "2026-09-26"
+ "generated_at": "2026-09-27"
 }
