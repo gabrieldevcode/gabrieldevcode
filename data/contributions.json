@@ -1819,26 +1819,31 @@
   {
    "date": "2026-10-17",
    "level": 1,
-   "count": 7
+   "count": 26
   },
   {
    "date": "2026-10-18",
-   "level": 0,
-   "count": 0
+   "level": 1,
+   "count": 19
+  },
+  {
+   "date": "2026-10-19",
+   "level": 1,
+   "count": 1
   }
  ],
  "stats": {
-  "total": 1411,
-  "days_tracked": 365,
-  "active_days": 79,
-  "current_streak": 15,
+  "total": 1450,
+  "days_tracked": 366,
+  "active_days": 81,
+  "current_streak": 17,
   "longest_streak": 46,
   "best_day": {
    "date": "2026-09-09",
    "count": 186
   },
   "first_date": "2025-10-19",
-  "last_date": "2026-10-18"
+  "last_date": "2026-10-19"
  },
- "generated_at": "2026-10-18"
+ "generated_at": "2026-10-19"
 }
